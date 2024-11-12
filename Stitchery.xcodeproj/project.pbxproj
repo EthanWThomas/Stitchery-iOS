@@ -10,9 +10,25 @@
 		792088182CD490F00030D151 /* Stitchery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stitchery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		797730C52CDAB857000D564C /* Exceptions for "Stitchery" folder in "Stitchery" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			assetTagsByRelativePath = {
+				APIKey.json = (APIKey, );
+			};
+			target = 792088172CD490F00030D151 /* Stitchery */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		7920881A2CD490F00030D151 /* Stitchery */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				797730C52CDAB857000D564C /* Exceptions for "Stitchery" folder in "Stitchery" target */,
+			);
+			explicitFileTypes = {
+				APIKey.json = text.json;
+			};
 			path = Stitchery;
 			sourceTree = "<group>";
 		};
@@ -77,6 +93,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					APIKey,
+				);
 				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
@@ -265,6 +284,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = APIKey;
 				PRODUCT_BUNDLE_IDENTIFIER = "Edu.dixietech.mad.ethanthomas-gmail.com.Stitchery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -294,6 +314,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = APIKey;
 				PRODUCT_BUNDLE_IDENTIFIER = "Edu.dixietech.mad.ethanthomas-gmail.com.Stitchery";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

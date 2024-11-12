@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var key: String = ""
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint.secondary)
-            Text("Hello, Tailor")
+            Text("Hello, world!, \n \(key)")
+            
+            Button("show key") {
+                showKey()
+            }
         }
         .padding()
+    }
+    
+    func showKey() {
+        key = """
+                \(KeyConstant.APIKey.myAPIKey)
+                """
     }
 }
 
