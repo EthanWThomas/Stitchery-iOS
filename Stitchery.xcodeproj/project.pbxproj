@@ -14,7 +14,7 @@
 		797730C52CDAB857000D564C /* Exceptions for "Stitchery" folder in "Stitchery" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			assetTagsByRelativePath = {
-				APIKey.json = (APIKey, );
+				Extentions/More/APIKey.json = (APIKey, );
 			};
 			target = 792088172CD490F00030D151 /* Stitchery */;
 		};
@@ -27,7 +27,7 @@
 				797730C52CDAB857000D564C /* Exceptions for "Stitchery" folder in "Stitchery" target */,
 			);
 			explicitFileTypes = {
-				APIKey.json = text.json;
+				Extentions/More/APIKey.json = text.json;
 			};
 			path = Stitchery;
 			sourceTree = "<group>";

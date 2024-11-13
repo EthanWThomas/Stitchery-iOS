@@ -33,7 +33,7 @@ struct SavedTailorView: View {
     private func listView(imageURL: String?, title: String, address: String, desciption: String?) -> some View {
         HStack(alignment: .top) {
             disPlayUrlImage(url: imageURL)
-                .frame(width: 150, height: 150)
+                .frame(width: 100, height: 100)
                 .cornerRadius(10)
             
             HStack(alignment: .center) {

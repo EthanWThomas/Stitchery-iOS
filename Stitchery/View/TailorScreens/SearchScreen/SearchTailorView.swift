@@ -88,7 +88,7 @@ struct SearchTailorView: View {
     ) -> some View {
         HStack(alignment: .top) {
             disPlayUrlImage(url: imageUrl)
-                .frame(width: 150, height: 150)
+                .frame(width: 100, height: 100)
                 .cornerRadius(10)
             
             HStack(alignment: .center) {
@@ -121,17 +121,6 @@ struct SearchTailorView: View {
         }
     }
 }
-//#Preview {
-//    do {
-//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-//        let catainer = try ModelContainer(for: Book.self, configurations: config)
-//        
-//        return BookListView(context: catainer.mainContext)
-//            .modelContainer(catainer)
-//    } catch {
-//        fatalError("Failed to create model container")
-//    }
-//}
 
 #Preview {
     do {
