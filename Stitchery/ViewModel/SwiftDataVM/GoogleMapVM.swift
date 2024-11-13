@@ -14,8 +14,6 @@ class GoogleMapVM {
     
     let context: ModelContext
     
-    var localResult = [GoogleMapsLocalResults.LocalResults]()
-    
     var localResultResponseModel = [LocalResultsDataModel]()
     
     init(context: ModelContext) {
@@ -33,7 +31,7 @@ class GoogleMapVM {
     }
     
     func saveLocalResult(localResult: GoogleMapsLocalResults.LocalResults) {
-        context.insert(LocalResultsDataModel(
+        let resultModel = LocalResultsDataModel(
             title: localResult.title,
             placeId: localResult.placeId,
             placeIdSearch: localResult.placeIdSearch,
@@ -47,13 +45,14 @@ class GoogleMapVM {
             phone: localResult.phone,
             website: localResult.website,
             itemDescription: localResult.description,
-            thumbnail: localResult.thumbnail))
+            thumbnail: localResult.thumbnail)
+        context.insert(resultModel)
         try? context.save()
         fetchLocalResult()
     }
     
-    func deleteLoaclResult(localResult: GoogleMapsLocalResults.LocalResults) {
-        context.delete(LocalResultsDataModel(
+    func deleteLocalResult(localResult: GoogleMapsLocalResults.LocalResults) {
+        let resultModel = LocalResultsDataModel(
             title: localResult.title,
             placeId: localResult.placeId,
             placeIdSearch: localResult.placeIdSearch,
@@ -67,7 +66,8 @@ class GoogleMapVM {
             phone: localResult.phone,
             website: localResult.website,
             itemDescription: localResult.description,
-            thumbnail: localResult.thumbnail))
+            thumbnail: localResult.thumbnail)
+        context.delete(resultModel)
         try? context.save()
     }
 }

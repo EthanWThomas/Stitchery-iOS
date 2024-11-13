@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SearchTailorView: View {
     
     @StateObject private var viewModel = LocalResultViewModel()
+    @State var swiftDataVM: GoogleMapVM
+    
+    init(context: ModelContext) {
+        self.swiftDataVM = GoogleMapVM(context: context)
+    }
     
     var body: some View {
         NavigationStack {
@@ -45,7 +51,27 @@ struct SearchTailorView: View {
                         imageUrl: tailor.thumbnail ?? "Unknown",
                         title: tailor.title,
                         address: tailor.address,
-                        description: tailor.description)
+                        description: tailor.description
+                    )
+                    .swipeActions(content: {
+                        Button {
+                            swiftDataVM.saveLocalResult(localResult: tailor)
+                        } label: {
+                            Image(systemName: "folder.fill.badge.plus")
+                                .tint(Color.red)
+                        }
+                    })
+                }
+            }
+        }
+//        .navigationTitle("Search Tailor")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    SavedTailorView(viewModel: swiftDataVM)
+                } label: {
+                    Image(systemName: "square.fill.text.grid.1x2")
+                        .tint(Color.black)
                 }
             }
         }
@@ -73,6 +99,7 @@ struct SearchTailorView: View {
                         .font(.subheadline)
                     Text(description ?? "No description")
                         .font(.subheadline)
+                        .lineLimit(3)
                 }
                 .padding(.leading, 10)
             }
@@ -94,7 +121,26 @@ struct SearchTailorView: View {
         }
     }
 }
+//#Preview {
+//    do {
+//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//        let catainer = try ModelContainer(for: Book.self, configurations: config)
+//        
+//        return BookListView(context: catainer.mainContext)
+//            .modelContainer(catainer)
+//    } catch {
+//        fatalError("Failed to create model container")
+//    }
+//}
 
 #Preview {
-    SearchTailorView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let catainer = try ModelContainer(for: LocalResultsDataModel.self, configurations: config)
+        
+        return SearchTailorView(context: catainer.mainContext)
+            .modelContainer(catainer)
+    } catch {
+        fatalError("Failed to create model container")
+    }
 }

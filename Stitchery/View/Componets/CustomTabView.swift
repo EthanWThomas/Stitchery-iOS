@@ -24,7 +24,6 @@ struct CustomTabView: View {
                 .frame(height: 70)
                 .foregroundStyle(Color.main)
                 .shadow(radius: 2)
-            
             HStack {
                 ForEach(0..<4) { index in
                     Button {
@@ -53,7 +52,7 @@ struct CustomTabView: View {
                         .foregroundStyle(index + 1 == tabSelection ? Color.blue : Color.white)
                     }
                 }
-                .frame(height: 80)
+//                .frame(width: 100, height: 80)
                 .clipShape(Capsule())
             }
             .frame(height: 80)

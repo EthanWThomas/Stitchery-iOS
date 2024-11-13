@@ -6,20 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct StitcheryApp: App {
+    
     var body: some Scene {
         WindowGroup {
             TabNavigation()
-//                .task {
-//                    do {
-//                        try await KeyConstant.loadAPIKey()
-//                    } catch {
-////                        debugPrint(KeyConstant.APIKeyError.self)
-//                        debugPrint(error.localizedDescription)
-//                    }
-//                }
+                .task {
+                    do {
+                        try await KeyConstant.loadAPIKey()
+                    } catch {
+//                        debugPrint(KeyConstant.APIKeyError.self)
+                        debugPrint(error.localizedDescription)
+                    }
+                }
         }
     }
 }

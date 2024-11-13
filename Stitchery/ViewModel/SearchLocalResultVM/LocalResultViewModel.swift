@@ -13,6 +13,9 @@ class LocalResultViewModel: ObservableObject {
     @Published private(set) var errorMessage: String?
     
     @Published var searchText = ""
+    @Published var latitude = ""
+    @Published var longitude = ""
+    
     
     @Published var localResult = [GoogleMapsLocalResults.LocalResults]()
     
@@ -32,6 +35,35 @@ class LocalResultViewModel: ObservableObject {
                 else { return }
                 
                 let result = try await self?.apiManager.searchGoogleMapsLocalResult(search: searchText).localResults
+                self?.isLoading = false
+                
+                await MainActor.run { [weak self] in
+                    self?.localResult = result!
+                }
+            } catch {
+                print("No Result Found \(error)")
+                self?.errorMessage = error.localizedDescription
+                self?.isLoading = false
+            }
+        }
+    }
+    
+    @MainActor
+    func searchForLocalResultWithaLocation() {
+        isLoading =  true
+        
+        Task { [weak self] in
+            do {
+                guard let searchText = self?.searchText
+                else { return }
+                
+                guard let latitude = self?.latitude
+                else { return }
+                
+                guard let longitude = self?.longitude
+                else { return }
+                
+                let result = try await self?.apiManager.seacrhGoogleMapLocalResultWithLatitudeAndlongitude(search: searchText, latitude: latitude, longitude: longitude).localResults
                 self?.isLoading = false
                 
                 await MainActor.run { [weak self] in

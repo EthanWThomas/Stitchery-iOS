@@ -6,10 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TabNavigation: View {
     
     @State var selectedTab = 1
+    
+    let cantainer: ModelContainer
+    
+    init() {
+        do {
+            self.cantainer = try ModelContainer(for: LocalResultsDataModel.self)
+        } catch {
+            fatalError("Could not load model container.")
+        }
+    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -17,7 +28,8 @@ struct TabNavigation: View {
                 ProfileView()
                     .tag(1)
                 
-                SearchTailorView()
+                SearchTailorView(context: cantainer.mainContext)
+                    .modelContainer(cantainer)
                     .tag(2)
                 
                 MessageRoom()
@@ -26,13 +38,13 @@ struct TabNavigation: View {
                 MapView()
                     .tag(4)
             }
-            .overlay(alignment: .bottom) {
+            .overlay(alignment: .bottomTrailing) {
                 CustomTabView(tabSelection: $selectedTab)
             }
         }
     }
 }
 
-#Preview {
-    TabNavigation()
-}
+//#Preview {
+//    TabNavigation()
+//}
