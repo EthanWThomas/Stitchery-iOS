@@ -28,24 +28,25 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct StitcheryApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-//    @State private var showTitleScreen = true
     @StateObject var viewModel = AuthViewModel()
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                Home()
-                    .environmentObject(viewModel)
-                    .task {
-                        do {
-                            try await KeyConstant.loadAPIKey()
-                        } catch {
-                            //                        debugPrint(KeyConstant.APIKeyError.self)
-                            debugPrint(error.localizedDescription)
-                        }
-                    }
-                    
-            }
+            TabNavigation()
+                .environmentObject(viewModel)
+//            NavigationStack {
+//                Home()
+//                    .task {
+//                        do {
+//                            try await KeyConstant.loadAPIKey()
+//                        } catch {
+//                            //                        debugPrint(KeyConstant.APIKeyError.self)
+//                            debugPrint(error.localizedDescription)
+//                        }
+//                    }
+//                
+//            }
+           
         }
     }
 }

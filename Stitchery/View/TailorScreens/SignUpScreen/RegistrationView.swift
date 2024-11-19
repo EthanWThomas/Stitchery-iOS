@@ -51,12 +51,12 @@ struct RegistrationView: View {
                     text: $fullname,
                     title: "User Name",
                     placeholder: "Enter Name")
-                .autocapitalization(.none)
                 
                 InputView(
                     text: $email,
                     title: "Email",
                     placeholder: "Enter Email")
+                .autocapitalization(.none)
                 
                 InputView(
                     text: $password,

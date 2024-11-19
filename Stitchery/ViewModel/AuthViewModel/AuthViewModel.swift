@@ -37,7 +37,7 @@ class AuthViewModel: ObservableObject {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            let user = User(id: result.user.uid, name: fullname, email: email)
+            let user = User(id: result.user.uid, fullname: fullname, email: email)
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
@@ -54,6 +54,10 @@ class AuthViewModel: ObservableObject {
         } catch {
             print("DEBUG: Failed to sign with error \(error.localizedDescription)")
         }
+    }
+    
+    func deleteAccount() {
+        
     }
     
     func fetchUser() async {

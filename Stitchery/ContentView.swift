@@ -16,7 +16,7 @@ struct ContentView: View {
         Group {
             Group {
                 if viewModel.userSession != nil {
-                    TabNavigation()
+                    ProfileView()
                 } else {
                     SignInView()
                 }

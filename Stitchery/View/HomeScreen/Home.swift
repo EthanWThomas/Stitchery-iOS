@@ -40,6 +40,7 @@ struct Home: View {
                     
                     NavigationLink {
                         SignInView()
+                            .navigationBarBackButtonHidden(true)
                     } label: {
                         Text("User Sign Up")
                             .font(.title)
