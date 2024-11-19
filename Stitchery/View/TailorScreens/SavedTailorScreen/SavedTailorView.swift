@@ -22,8 +22,20 @@ struct SavedTailorView: View {
                         address: tailor.address,
                         desciption: tailor.itemDescription
                     )
+                    .swipeActions {
+                        Button {
+                            viewModel.deleteLocalResult(localResult: tailor)
+//                            viewModel.deleteLocalResult(localResult: tailor)
+                        } label: {
+                            Image(systemName: "trash.fill")
+                                .tint(Color.red)
+                        }
+
+                    }
+                    
                 }
             }
+            .navigationTitle("Saved Tailor Screen")
             .onAppear {
                 viewModel.fetchLocalResult()
             }

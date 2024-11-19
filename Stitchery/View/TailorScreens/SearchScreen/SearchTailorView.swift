@@ -58,7 +58,7 @@ struct SearchTailorView: View {
                             swiftDataVM.saveLocalResult(localResult: tailor)
                         } label: {
                             Image(systemName: "folder.fill.badge.plus")
-                                .tint(Color.red)
+                                .tint(Color.orange)
                         }
                     })
                 }

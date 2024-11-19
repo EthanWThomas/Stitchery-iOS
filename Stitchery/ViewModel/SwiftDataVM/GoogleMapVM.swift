@@ -51,23 +51,29 @@ class GoogleMapVM {
         fetchLocalResult()
     }
     
-    func deleteLocalResult(localResult: GoogleMapsLocalResults.LocalResults) {
-        let resultModel = LocalResultsDataModel(
-            title: localResult.title,
-            placeId: localResult.placeId,
-            placeIdSearch: localResult.placeIdSearch,
-            reviews: localResult.reviews,
-            rating: localResult.rating,
-            price: localResult.price,
-            type: localResult.type,
-            types: localResult.types,
-            address: localResult.address,
-            openState: localResult.openState,
-            phone: localResult.phone,
-            website: localResult.website,
-            itemDescription: localResult.description,
-            thumbnail: localResult.thumbnail)
-        context.delete(resultModel)
+    func deleteLocalResult(localResult: LocalResultsDataModel) {
+        context.delete(localResult)
         try? context.save()
+        fetchLocalResult()
     }
+    
+//    func deleteLocalResult(localResult: GoogleMapsLocalResults.LocalResults) {
+//        let resultModel = LocalResultsDataModel(
+//            title: localResult.title,
+//            placeId: localResult.placeId,
+//            placeIdSearch: localResult.placeIdSearch,
+//            reviews: localResult.reviews,
+//            rating: localResult.rating,
+//            price: localResult.price,
+//            type: localResult.type,
+//            types: localResult.types,
+//            address: localResult.address,
+//            openState: localResult.openState,
+//            phone: localResult.phone,
+//            website: localResult.website,
+//            itemDescription: localResult.description,
+//            thumbnail: localResult.thumbnail)
+//        context.delete(resultModel)
+//        try? context.save()
+//    }
 }

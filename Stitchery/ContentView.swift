@@ -10,26 +10,25 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var key: String = ""
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint.secondary)
-            Text("Hello, world!, \n \(key)")
-            
-            Button("show key") {
-                showKey()
+        Group {
+            Group {
+                if viewModel.userSession != nil {
+                    TabNavigation()
+                } else {
+                    SignInView()
+                }
             }
         }
-        .padding()
     }
     
-    func showKey() {
-        key = """
-                \(KeyConstant.APIKey.myAPIKey)
-                """
-    }
+//    func showKey() {
+//        key = """
+//                \(KeyConstant.APIKey.myAPIKey)
+//                """
+//    }
 }
 
 #Preview {
