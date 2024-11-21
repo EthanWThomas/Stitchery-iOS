@@ -15,8 +15,7 @@ struct RegistrationView: View {
     @State private var confirmPassword = ""
     
     @Environment(\.dismiss) var dismiss
-    
-    @EnvironmentObject var viewModel: AuthViewModel
+    @Environment(AuthViewModel.self) var viewModel
     
     var body: some View {
         NavigationStack {
@@ -44,7 +43,6 @@ struct RegistrationView: View {
     
     private var logInView: some View {
         VStack {
-         
             VStack(spacing: 24) {
 //                Spacer()
                 InputView(

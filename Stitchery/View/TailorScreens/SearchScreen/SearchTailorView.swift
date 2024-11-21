@@ -51,8 +51,7 @@ struct SearchTailorView: View {
                         imageUrl: tailor.thumbnail ?? "Unknown",
                         title: tailor.title,
                         address: tailor.address,
-                        description: tailor.description
-                    )
+                        description: tailor.description)
                     .swipeActions(content: {
                         Button {
                             swiftDataVM.saveLocalResult(localResult: tailor)

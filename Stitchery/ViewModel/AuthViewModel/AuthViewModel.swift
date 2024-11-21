@@ -10,10 +10,11 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 
+@Observable
 @MainActor
-class AuthViewModel: ObservableObject {
-    @Published var userSession: FirebaseAuth.User?
-    @Published var currentUser: User?
+class AuthViewModel{
+    var userSession: FirebaseAuth.User?
+    var currentUser: User?
     
     init() {
         self.userSession = Auth.auth().currentUser

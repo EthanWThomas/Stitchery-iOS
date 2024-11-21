@@ -9,14 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var showHomeScreen = true
     @State private var key: String = ""
-    @EnvironmentObject var viewModel: AuthViewModel
+    @Environment(AuthViewModel.self) var viewModel
     
     var body: some View {
         Group {
-            Group {
+            if showHomeScreen {
+                Home(showHomeScreen: $showHomeScreen)
+            } else {
                 if viewModel.userSession != nil {
-                    ProfileView()
+                    TabNavigation()
                 } else {
                     SignInView()
                 }
@@ -24,11 +27,23 @@ struct ContentView: View {
         }
     }
     
-//    func showKey() {
-//        key = """
-//                \(KeyConstant.APIKey.myAPIKey)
-//                """
-//    }
+    //            Group {
+    //                if showTitleScreen {
+    //
+    //                } else {
+    //                    if viewModel.userSession != nil {
+    //                        ProfileView()
+    //                    } else {
+    //                        SignInView()
+    //                    }
+    //                }
+    //            }
+    
+    //    func showKey() {
+    //        key = """
+    //                \(KeyConstant.APIKey.myAPIKey)
+    //                """
+    //    }
 }
 
 #Preview {

@@ -28,25 +28,31 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct StitcheryApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject var viewModel = AuthViewModel()
+    
     
     var body: some Scene {
         WindowGroup {
-            TabNavigation()
-                .environmentObject(viewModel)
-//            NavigationStack {
-//                Home()
-//                    .task {
-//                        do {
-//                            try await KeyConstant.loadAPIKey()
-//                        } catch {
-//                            //                        debugPrint(KeyConstant.APIKeyError.self)
-//                            debugPrint(error.localizedDescription)
-//                        }
-//                    }
-//                
-//            }
-           
+            RootView()
+            //            TabNavigation()
+            //                .environmentObject(viewModel)
+            
         }
+    }
+}
+
+struct RootView: View {
+    
+    @State var viewModel = AuthViewModel()
+    @State var showHomeScreen = true
+    
+    var body: some View {
+        Group {
+            if viewModel.userSession != nil {
+                TabNavigation()
+            } else {
+                Home(showHomeScreen: $showHomeScreen)
+            }
+        }
+        .environment(viewModel)
     }
 }

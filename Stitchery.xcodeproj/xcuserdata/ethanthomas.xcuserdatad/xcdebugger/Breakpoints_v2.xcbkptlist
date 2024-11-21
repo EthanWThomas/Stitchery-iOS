@@ -322,13 +322,13 @@
             filePath = "Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "createUser(withEmail:password:fullname:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "F5240F49-1674-470F-8056-64D4F4A14D32 - 5c411d08f87ac629"
+                  uuid = "F5240F49-1674-470F-8056-64D4F4A14D32 - 5c411d08f87ac646"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -338,11 +338,11 @@
                   urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43">
+                  startingLineNumber = "44"
+                  endingLineNumber = "44">
                </Location>
                <Location
-                  uuid = "F5240F49-1674-470F-8056-64D4F4A14D32 - 87dadfb33ff1a4f3"
+                  uuid = "F5240F49-1674-470F-8056-64D4F4A14D32 - 87dadfb33ff1a49c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -352,11 +352,11 @@
                   urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43">
+                  startingLineNumber = "44"
+                  endingLineNumber = "44">
                </Location>
                <Location
-                  uuid = "F5240F49-1674-470F-8056-64D4F4A14D32 - 27c91812c4508aab"
+                  uuid = "F5240F49-1674-470F-8056-64D4F4A14D32 - 27c91812c4508ac4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -366,8 +366,8 @@
                   urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43">
+                  startingLineNumber = "44"
+                  endingLineNumber = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -376,6 +376,22 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "832B0827-2149-4391-A2DD-A23915F73C70"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "createUser(withEmail:password:fullname:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84F7AA39-6331-4EE8-932A-B83A1B4B9018"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -391,33 +407,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "84F7AA39-6331-4EE8-932A-B83A1B4B9018"
+            uuid = "1FA1A944-1EB8-4229-8A39-41B132D52BB9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "createUser(withEmail:password:fullname:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1FA1A944-1EB8-4229-8A39-41B132D52BB9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "fetchUser()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1FA1A944-1EB8-4229-8A39-41B132D52BB9 - 845985a3134ca441"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Stitchery.AuthViewModel.fetchUser() async -&gt; ()"
+                  moduleName = "Stitchery.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67">
+               </Location>
+               <Location
+                  uuid = "1FA1A944-1EB8-4229-8A39-41B132D52BB9 - 38847cb4f0def142"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Stitchery.AuthViewModel.fetchUser() async -&gt; ()"
+                  moduleName = "Stitchery.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -430,13 +460,13 @@
             filePath = "Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "logInView"
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - e0866b4f886e9899"
+                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - e0866b4f886e985b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -446,11 +476,11 @@
                   urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78">
+                  startingLineNumber = "76"
+                  endingLineNumber = "76">
                </Location>
                <Location
-                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - 6734b5e5db2360a0"
+                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - 6734b5e5db236062"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -460,11 +490,11 @@
                   urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78">
+                  startingLineNumber = "76"
+                  endingLineNumber = "76">
                </Location>
                <Location
-                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - 333a2474adc5549b"
+                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - 333a2474adc55459"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -474,11 +504,11 @@
                   urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78">
+                  startingLineNumber = "76"
+                  endingLineNumber = "76">
                </Location>
                <Location
-                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - 1d9004f7c0f0f694"
+                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - 1d9004f7c0f0f656"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -488,8 +518,8 @@
                   urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78">
+                  startingLineNumber = "76"
+                  endingLineNumber = "76">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -504,8 +534,8 @@
             filePath = "Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "logInView"
             landmarkType = "24">
          </BreakpointContent>
@@ -520,8 +550,8 @@
             filePath = "Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "logInView"
             landmarkType = "24">
          </BreakpointContent>
@@ -546,7 +576,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "DF987D3C-F070-4A5B-97FA-2301992244F0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stitchery/View/TailorScreens/SavedTailorScreen/SavedTailorView.swift"
@@ -572,36 +602,6 @@
             endingLineNumber = "59"
             landmarkName = "tailorListView"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "D074F0AE-404B-4567-B0CC-7B78B9D53F8D - 77e924e8a8ab9c28"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.tint&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(Swift.Optional&lt;&#x3c4;_1_0&gt;) -&gt; some&gt;&gt;.0&gt; in closure #1 (Stitchery.GoogleMapsLocalResults.LocalResults) -&gt; &lt;&lt;opaque return type of SwiftUI.View.swipeActions&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(edge: SwiftUI.HorizontalEdge, allowsFullSwipe: Swift.Bool, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Stitchery.GoogleMapsLocalResults.LocalResults&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.swipeActions&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(edge: SwiftUI.HorizontalEdge, allowsFullSwipe: Swift.Bool, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt; in Stitchery.SearchTailorView.tailorListView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SearchScreen/SearchTailorView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59">
-               </Location>
-               <Location
-                  uuid = "D074F0AE-404B-4567-B0CC-7B78B9D53F8D - 1ae6059a25a4b4fe"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.tint&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(Swift.Optional&lt;&#x3c4;_1_0&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.tint&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(Swift.Optional&lt;&#x3c4;_1_0&gt;) -&gt; some&gt;&gt;.0&gt; in closure #1 (Stitchery.GoogleMapsLocalResults.LocalResults) -&gt; &lt;&lt;opaque return type of SwiftUI.View.swipeActions&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(edge: SwiftUI.HorizontalEdge, allowsFullSwipe: Swift.Bool, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Stitchery.GoogleMapsLocalResults.LocalResults&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.swipeActions&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(edge: SwiftUI.HorizontalEdge, allowsFullSwipe: Swift.Bool, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt; in Stitchery.SearchTailorView.tailorListView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SearchScreen/SearchTailorView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -617,6 +617,112 @@
             startingLineNumber = "60"
             endingLineNumber = "60"
             landmarkName = "tailorListView"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "919536AC-44A0-4240-817D-1BF7B05B7F31"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "sigInView"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E55B03D3-6D0B-404A-AAD7-291ED05FBB5A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "sigInView"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "E55B03D3-6D0B-404A-AAD7-291ED05FBB5A - 8de3da1c0809637f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
+                  moduleName = "Stitchery.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59">
+               </Location>
+               <Location
+                  uuid = "E55B03D3-6D0B-404A-AAD7-291ED05FBB5A - 388dad437a5aee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
+                  moduleName = "Stitchery.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59">
+               </Location>
+               <Location
+                  uuid = "E55B03D3-6D0B-404A-AAD7-291ED05FBB5A - f87238da356c0f51"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
+                  moduleName = "Stitchery.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59">
+               </Location>
+               <Location
+                  uuid = "E55B03D3-6D0B-404A-AAD7-291ED05FBB5A - adba963acb027d5a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
+                  moduleName = "Stitchery.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E152B29F-8EB1-491A-AD3C-DAD121F31577"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stitchery/View/TailorScreens/ProfileScreen/UserDetillScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
