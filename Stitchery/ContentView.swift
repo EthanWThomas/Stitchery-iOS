@@ -14,36 +14,11 @@ struct ContentView: View {
     @Environment(AuthViewModel.self) var viewModel
     
     var body: some View {
-        Group {
-            if showHomeScreen {
-                Home(showHomeScreen: $showHomeScreen)
-            } else {
-                if viewModel.userSession != nil {
-                    TabNavigation()
-                } else {
-                    SignInView()
-                }
-            }
+        VStack {
+            Image(systemName: "cart")
+            Text("Hello World")
         }
     }
-    
-    //            Group {
-    //                if showTitleScreen {
-    //
-    //                } else {
-    //                    if viewModel.userSession != nil {
-    //                        ProfileView()
-    //                    } else {
-    //                        SignInView()
-    //                    }
-    //                }
-    //            }
-    
-    //    func showKey() {
-    //        key = """
-    //                \(KeyConstant.APIKey.myAPIKey)
-    //                """
-    //    }
 }
 
 #Preview {

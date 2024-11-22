@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct Home: View {
-//    @EnvironmentObject var viewModel: AuthViewModel
-    @Binding var showHomeScreen: Bool
-    
     var body: some View {
         NavigationStack {
             VStack {

@@ -82,92 +82,6 @@
             endingLineNumber = "40"
             landmarkName = "searchForLocalResult()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4B3AB8BB-450B-4935-80A0-880661F11947 - c0caab8d1268dce4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in Stitchery.LocalResultViewModel.searchForLocalResult() -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/SearchLocalResultVM/LocalResultViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40">
-               </Location>
-               <Location
-                  uuid = "4B3AB8BB-450B-4935-80A0-880661F11947 - 3fb8d247e61d64e0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in Stitchery.LocalResultViewModel.searchForLocalResult() -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/SearchLocalResultVM/LocalResultViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40">
-               </Location>
-               <Location
-                  uuid = "4B3AB8BB-450B-4935-80A0-880661F11947 - 5a2907f045ac2fd5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) await resume partial function for closure #1 () async -&gt; () in Stitchery.LocalResultViewModel.searchForLocalResult() -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/SearchLocalResultVM/LocalResultViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40">
-               </Location>
-               <Location
-                  uuid = "4B3AB8BB-450B-4935-80A0-880661F11947 - 6e2eda00a9cfec2a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for closure #1 () async -&gt; () in Stitchery.LocalResultViewModel.searchForLocalResult() -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/SearchLocalResultVM/LocalResultViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34">
-               </Location>
-               <Location
-                  uuid = "4B3AB8BB-450B-4935-80A0-880661F11947 - 6e2eda00a9cfecec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for closure #1 () async -&gt; () in Stitchery.LocalResultViewModel.searchForLocalResult() -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/SearchLocalResultVM/LocalResultViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40">
-               </Location>
-               <Location
-                  uuid = "4B3AB8BB-450B-4935-80A0-880661F11947 - cbb5509a5b8faaef"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor @Sendable () -&gt; Swift.Optional&lt;()&gt; in closure #1 () async -&gt; () in Stitchery.LocalResultViewModel.searchForLocalResult() -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/SearchLocalResultVM/LocalResultViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -200,36 +114,6 @@
             endingLineNumber = "38"
             landmarkName = "searchForLocalResult()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9206856F-643E-4EF5-AFF1-3C3214C3C888 - c0caab8d1268dca6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in Stitchery.LocalResultViewModel.searchForLocalResult() -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/SearchLocalResultVM/LocalResultViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38">
-               </Location>
-               <Location
-                  uuid = "9206856F-643E-4EF5-AFF1-3C3214C3C888 - 3fb8d247e61d64a2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in Stitchery.LocalResultViewModel.searchForLocalResult() -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/SearchLocalResultVM/LocalResultViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -326,50 +210,6 @@
             endingLineNumber = "44"
             landmarkName = "createUser(withEmail:password:fullname:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F5240F49-1674-470F-8056-64D4F4A14D32 - 5c411d08f87ac646"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for Stitchery.AuthViewModel.createUser(withEmail: Swift.String, password: Swift.String, fullname: Swift.String) async throws -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44">
-               </Location>
-               <Location
-                  uuid = "F5240F49-1674-470F-8056-64D4F4A14D32 - 87dadfb33ff1a49c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) await resume partial function for Stitchery.AuthViewModel.createUser(withEmail: Swift.String, password: Swift.String, fullname: Swift.String) async throws -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44">
-               </Location>
-               <Location
-                  uuid = "F5240F49-1674-470F-8056-64D4F4A14D32 - 27c91812c4508ac4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(7) suspend resume partial function for Stitchery.AuthViewModel.createUser(withEmail: Swift.String, password: Swift.String, fullname: Swift.String) async throws -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -418,36 +258,6 @@
             endingLineNumber = "67"
             landmarkName = "fetchUser()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1FA1A944-1EB8-4229-8A39-41B132D52BB9 - 845985a3134ca441"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Stitchery.AuthViewModel.fetchUser() async -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67">
-               </Location>
-               <Location
-                  uuid = "1FA1A944-1EB8-4229-8A39-41B132D52BB9 - 38847cb4f0def142"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for Stitchery.AuthViewModel.fetchUser() async -&gt; ()"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/ViewModel/AuthViewModel/AuthViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -464,64 +274,6 @@
             endingLineNumber = "76"
             landmarkName = "logInView"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - e0866b4f886e985b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Button&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;&gt;&gt;, SwiftUI.Spacer)&gt; in Stitchery.RegistrationView.logInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76">
-               </Location>
-               <Location
-                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - 6734b5e5db236062"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Button&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;&gt;&gt;, SwiftUI.Spacer)&gt; in Stitchery.RegistrationView.logInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76">
-               </Location>
-               <Location
-                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - 333a2474adc55459"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Button&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;&gt;&gt;, SwiftUI.Spacer)&gt; in Stitchery.RegistrationView.logInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76">
-               </Location>
-               <Location
-                  uuid = "30028BD4-599F-489B-A48E-8B0B61F18B9D - 1d9004f7c0f0f656"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Button&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;&gt;&gt;, SwiftUI.Spacer)&gt; in Stitchery.RegistrationView.logInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -598,8 +350,8 @@
             filePath = "Stitchery/View/TailorScreens/SearchScreen/SearchTailorView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "tailorListView"
             landmarkType = "24">
          </BreakpointContent>
@@ -614,8 +366,8 @@
             filePath = "Stitchery/View/TailorScreens/SearchScreen/SearchTailorView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "tailorListView"
             landmarkType = "24">
          </BreakpointContent>
@@ -630,8 +382,8 @@
             filePath = "Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "sigInView"
             landmarkType = "24">
          </BreakpointContent>
@@ -646,68 +398,10 @@
             filePath = "Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "sigInView"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "E55B03D3-6D0B-404A-AAD7-291ED05FBB5A - 8de3da1c0809637f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59">
-               </Location>
-               <Location
-                  uuid = "E55B03D3-6D0B-404A-AAD7-291ED05FBB5A - 388dad437a5aee"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59">
-               </Location>
-               <Location
-                  uuid = "E55B03D3-6D0B-404A-AAD7-291ED05FBB5A - f87238da356c0f51"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59">
-               </Location>
-               <Location
-                  uuid = "E55B03D3-6D0B-404A-AAD7-291ED05FBB5A - adba963acb027d5a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 () async throws -&gt; () in closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

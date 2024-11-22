@@ -9,7 +9,7 @@ import Foundation
 
 extension SerpAPIManager {
     func searchGoogleMapsLocalResult(search query: String) async throws -> GoogleMapsLocalResults {
-        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=\(query)&google_domain=google.com&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
+        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=Tailor&google_domain=google.com&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
         else { throw ResquestError.failedToCreateURL }
         
         var request = URLRequest(url: url)

@@ -37,7 +37,6 @@ struct ProfileScreen: View {
                             }
                         }
                     }
-                    
                     Section("Account") {
                         Button {
                             viewModel.signOut()
@@ -58,6 +57,16 @@ struct ProfileScreen: View {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    private var profiledisplayBackround: some View {
+        ZStack {
+            VStack(alignment: .center) {
+                Rectangle()
+                    .frame(width: 420, height: 700)
+                    .foregroundStyle(Color.white)
             }
         }
     }

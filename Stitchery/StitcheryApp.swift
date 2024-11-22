@@ -28,20 +28,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct StitcheryApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
-    
     var body: some Scene {
         WindowGroup {
             RootView()
-            //            TabNavigation()
-            //                .environmentObject(viewModel)
-            
         }
     }
 }
 
 struct RootView: View {
-    
     @State var viewModel = AuthViewModel()
     @State var showHomeScreen = true
     
@@ -50,7 +44,7 @@ struct RootView: View {
             if viewModel.userSession != nil {
                 TabNavigation()
             } else {
-                Home(showHomeScreen: $showHomeScreen)
+                Home()
             }
         }
         .environment(viewModel)

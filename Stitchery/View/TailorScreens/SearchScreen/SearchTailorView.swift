@@ -19,25 +19,58 @@ struct SearchTailorView: View {
     
     var body: some View {
         NavigationStack {
-            searchBar
-            tailorListView
+            VStack(spacing: 0) {
+                titleScreen
+                searchBar
+                tailorListView
+            }
         }
     }
     
-    private var searchBar: some View {
-        HStack {
-            TextField("Search Tailor", text: $viewModel.searchText)
-                .foregroundStyle(Color.accentColor)
-        }
-        .font(.headline)
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.white)
-                .stroke(Color.gray)
+    private var titleScreen: some View {
+        VStack {
+            Text("Search Screen")
+                .fontWeight(.semibold)
+                .font(.largeTitle)
+                .foregroundStyle(Color.text)
                 .shadow(color: .primary.opacity(0.15), radius: 10, x: 0, y: 0)
-        )
-        .padding()
+        }
+        .frame(width: 450, height: 80)
+        .background(Color.main)
+    }
+    
+    private var searchBar: some View {
+        HStack(spacing: 1) {
+            ZStack {
+                HStack {
+//                    Spacer(minLength: 1)
+                    CustomSearchBar(searchText: $viewModel.searchText)
+                    Spacer(minLength: -1)
+                    NavigationLink {
+                        SavedTailorView(viewModel: swiftDataVM)
+                    } label: {
+                        Image(systemName: "text.justify")
+                            .tint(Color.text)
+                            .font(.largeTitle)
+                    }
+                    .padding()
+                    .frame(width: 60, height: 60)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.white)
+                            .stroke(Color.gray)
+                            .shadow(color: .primary.opacity(0.15), radius: 10, x: 0, y: 0)
+                    )
+                    Spacer(minLength: 15)
+                }
+            }
+            .frame(height: 80)
+            .background(
+                Rectangle()
+                    .fill(Color.buttons)
+                    .stroke(Color.black)
+            )
+        }
         .onSubmit {
             viewModel.searchForLocalResult()
         }
@@ -56,21 +89,10 @@ struct SearchTailorView: View {
                         Button {
                             swiftDataVM.saveLocalResult(localResult: tailor)
                         } label: {
-                            Image(systemName: "folder.fill.badge.plus")
+                            Image(systemName: "heart.text.square")
                                 .tint(Color.orange)
                         }
                     })
-                }
-            }
-        }
-//        .navigationTitle("Search Tailor")
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    SavedTailorView(viewModel: swiftDataVM)
-                } label: {
-                    Image(systemName: "square.fill.text.grid.1x2")
-                        .tint(Color.black)
                 }
             }
         }
@@ -105,6 +127,16 @@ struct SearchTailorView: View {
         }
     }
     
+    private var topbarDisplay: some View {
+        ZStack {
+            VStack(alignment: .leading) {
+                Rectangle()
+                    .frame(width: 420, height: 110)
+                    .foregroundStyle(Color.main)
+            }
+        }
+    }
+    
     private func disPlayUrlImage(url: String?) -> some View {
         AsyncImage(url: URL(string: url ?? "Unknown")) { phase in
             switch phase {
@@ -119,6 +151,44 @@ struct SearchTailorView: View {
             }
         }
     }
+    
+}
+
+struct CustomSearchBar: View {
+    @Binding var searchText: String
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(
+                    searchText.isEmpty ? Color.secondary : Color.accentColor
+                )
+            TextField("Search Tailor", text: $searchText)
+                .foregroundStyle(Color.accentColor)
+                .overlay(
+                    Image(systemName: "xmark.circle.fill")
+                        .padding()
+                        .offset(x: 10)
+                        .foregroundStyle(Color.accentColor)
+                        .opacity(searchText.isEmpty ? 0.0 : 1.0)
+                        .onTapGesture {
+                            searchText = ""
+                        }
+                    ,alignment: .trailing
+                )
+        }
+        .font(.headline)
+        .padding()
+        .padding()
+        .frame(width: 310, height: 60)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white)
+                .stroke(Color.gray)
+                .shadow(color: .primary.opacity(0.15), radius: 10, x: 0, y: 0)
+        )
+        .padding()
+    }
 }
 
 #Preview {
@@ -132,3 +202,4 @@ struct SearchTailorView: View {
         fatalError("Failed to create model container")
     }
 }
+
