@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct Home: View {
+    
+    @State var showSignIn: Bool
+    
+    init(showSignIn: Bool = true, showSigInScreen: Bool = true) {
+        self.showSignIn = AuthManger.shared.getCurrentUser() == nil
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -34,9 +41,8 @@ struct Home: View {
                         .background(Color.buttons)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                 }
-                
                 NavigationLink {
-                    SignInView()
+                    SignInView(showSigInScreen: $showSignIn)
                         .navigationBarBackButtonHidden(true)
                 } label: {
                     Text("User Sign Up")
@@ -56,6 +62,6 @@ struct Home: View {
     }
 }
 
-#Preview {
+//#Preview {
 //    Home()
-}
+//}

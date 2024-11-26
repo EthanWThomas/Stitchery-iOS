@@ -8,19 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showSignIn: Bool
     
-    @State var showHomeScreen = true
-    @State private var key: String = ""
     @Environment(AuthViewModel.self) var viewModel
     
+    init(showSignIn: Bool = true, showSigInScreen: Bool = true) {
+        self.showSignIn = AuthManger.shared.getCurrentUser() == nil
+    }
+    
     var body: some View {
-        VStack {
-            Image(systemName: "cart")
-            Text("Hello World")
+        if showSignIn {
+            SignInView(showSigInScreen: $showSignIn)
+        } else {
+            NavigationStack {
+                ZStack {
+                    ProfileScreen()
+                }
+            }
         }
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}

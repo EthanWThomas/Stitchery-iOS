@@ -11,6 +11,7 @@ import SwiftData
 struct TabNavigation: View {
     
     @State var selectedTab = 1
+    @State var viewModel = AuthViewModel()
     
     let cantainer: ModelContainer
     

@@ -57,6 +57,23 @@ struct ProfileScreen: View {
                         }
                     }
                 }
+            } else if let googleUser = AuthManger.shared.getCurrentUser() {
+                List {
+                    Section {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(googleUser.name)
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .padding()
+                                
+                                Text(googleUser.email ?? "No Email?")
+                                    .font(.footnote)
+                                    .accentColor(.gray)
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -72,6 +89,6 @@ struct ProfileScreen: View {
     }
 }
 
-#Preview {
-    ProfileScreen()
-}
+//#Preview {
+//    ProfileScreen()
+//}

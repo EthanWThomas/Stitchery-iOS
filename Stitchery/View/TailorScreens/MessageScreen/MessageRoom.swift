@@ -13,6 +13,18 @@ struct MessageRoom: View {
             ContentUnavailableView("Message View", systemImage: "message")
         }
     }
+    
+    private var titleScreen: some View {
+        VStack {
+            Text("Chat Screen")
+                .fontWeight(.semibold)
+                .font(.largeTitle)
+                .foregroundStyle(Color.text)
+                .shadow(color: .primary.opacity(0.15), radius: 10, x: 0, y: 0)
+        }
+        .frame(width: 450, height: 80)
+        .background(Color.main)
+    }
 }
 
 #Preview {

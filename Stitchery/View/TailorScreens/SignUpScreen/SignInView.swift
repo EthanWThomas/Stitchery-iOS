@@ -11,7 +11,15 @@ struct SignInView: View {
     @State private var email = ""
     @State private var password = ""
     
+//    @State var showSignIn: Bool
+//    
+//    init(showSignIn: Bool = true, showSigInScreen: Bool = true) {
+//        self.showSignIn = AuthManger.shared.getCurrentUser() == nil
+//    }
+    
     @Environment(AuthViewModel.self) var viewModel
+    
+    @Binding var showSigInScreen: Bool
     
     var body: some View {
         NavigationStack {
@@ -71,7 +79,15 @@ struct SignInView: View {
             .padding(.top, 24)
             
             Button {
-                // TODO: add sign in with google action
+                AuthManger.shared.SignInWithGoogle { result in
+                    switch result {
+                        case .success(_):
+//                            break
+                            showSigInScreen = false
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                    }
+                }
             } label: {
                 HStack {
                     Text("SigIn with Google")
@@ -86,7 +102,7 @@ struct SignInView: View {
             Spacer(minLength: 350)
             
             NavigationLink {
-                RegistrationView()
+                RegistrationView(showSigInScreen: $showSigInScreen)
                     .navigationBarBackButtonHidden(true)
             } label: {
                 Text("Don't have an account ?")
@@ -108,6 +124,6 @@ struct SignInView: View {
     }
 }
 
-#Preview {
-    SignInView()
-}
+//#Preview {
+//    SignInView()
+//}

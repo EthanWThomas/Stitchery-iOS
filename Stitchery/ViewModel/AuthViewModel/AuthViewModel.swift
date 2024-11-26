@@ -15,6 +15,7 @@ import FirebaseFirestore
 class AuthViewModel{
     var userSession: FirebaseAuth.User?
     var currentUser: User?
+    var user = [User]()
     
     init() {
         self.userSession = Auth.auth().currentUser

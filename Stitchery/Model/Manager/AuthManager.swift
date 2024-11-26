@@ -11,7 +11,7 @@ import GoogleSignInSwift
 import FirebaseAuth
 import FirebaseFirestore
 
-struct ChatRoomUser {
+struct StitcheryUser {
     let Uid: String
     let name: String
     let email: String?
@@ -30,16 +30,17 @@ final class AuthManger {
     
     let auth = Auth.auth()
     
-    func getCurrentUser() -> ChatRoomUser? {
+    func getCurrentUser() -> StitcheryUser? {
         guard let authUser = auth.currentUser else {
             return nil
         }
         
-        return ChatRoomUser(Uid: authUser.uid, name: authUser.displayName ?? "Unknown", email: authUser.email, photoURL: authUser.photoURL?.absoluteString)
+        return StitcheryUser(Uid: authUser.uid, name: authUser.displayName ?? "Unknown", email: authUser.email, photoURL: authUser.photoURL?.absoluteString)
+//        return User(id: authUser.uid, fullname: authUser.displayName ?? "Unknown", email: authUser.email ?? "Unknown", photoUrl: authUser.photoURL?.absoluteString)
     }
     
-    func SignInWithGoogle(completion: @escaping (Result<ChatRoomUser, GoogleSignInError>) -> Void) {
-        let clientID = "437729671182-jknbju9l9tdt27je4an79k66810pdd5f.apps.googleusercontent.com"
+    func SignInWithGoogle(completion: @escaping (Result<StitcheryUser, GoogleSignInError>) -> Void) {
+        let clientID = "208798065261-ts2lhecest9rrbih6l9832jpmpgcd1re.apps.googleusercontent.com"
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
         
@@ -64,7 +65,18 @@ final class AuthManger {
                     completion(.failure(.authSignInError))
                     return
                 }
-                let user = ChatRoomUser(Uid: result.user.uid, name: result.user.displayName ?? "Unknown", email: result.user.email, photoURL: result.user.photoURL?.absoluteString)
+//                let user = User(
+//                    id: result.user.uid,
+//                    fullname: result.user.displayName ?? "Unknown",
+//                    email: result.user.email ?? "Unknown",
+//                    photoUrl: result.user.photoURL?.absoluteString
+//                )
+//                completion(.success(user))
+                let user = StitcheryUser(
+                    Uid: result.user.uid,
+                    name: result.user.displayName ?? "Unknown",
+                    email: result.user.email,
+                    photoURL: result.user.photoURL?.absoluteString)
                 completion(.success(user))
             }
         }
