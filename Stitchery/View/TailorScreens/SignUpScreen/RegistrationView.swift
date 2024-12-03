@@ -13,6 +13,8 @@ struct RegistrationView: View {
     @State private var fullname = ""
     @State private var password = ""
     @State private var confirmPassword = ""
+    @State private var alertTitle: String = ""
+    @State private var showAlert: Bool = false
     
     @Environment(\.dismiss) var dismiss
     @Environment(AuthViewModel.self) var viewModel
@@ -40,7 +42,7 @@ struct RegistrationView: View {
             }
             .background(Color.main)
         }
-        
+        .alert(isPresented: $showAlert, content: getAlert)
     }
     
     private var logInView: some View {
@@ -74,11 +76,13 @@ struct RegistrationView: View {
             .padding(.top, 12)
             
             Button {
-                Task {
-                    try await viewModel.createUser(
-                        withEmail: email,
-                        password: password,
-                        fullname: fullname)
+                if textIsApproiate() {
+                    Task {
+                        try await viewModel.createUser(
+                            withEmail: email,
+                            password: password,
+                            fullname: fullname)
+                    }
                 }
             } label: {
                 HStack {
@@ -137,6 +141,25 @@ struct RegistrationView: View {
                     .foregroundStyle(Color.white)
             }
         }
+    }
+    
+    private func textIsApproiate() -> Bool {
+        if password.count > 12 {
+            alertTitle = "The Password may not be greater than 12 characters"
+            
+            showAlert.toggle()
+            return false
+        } else if password.count < 3 {
+            alertTitle = "The Password must be at least 3 characters."
+            
+            showAlert.toggle()
+            return false
+        }
+        return true
+    }
+    
+    private func getAlert () -> Alert {
+        return Alert(title: Text(alertTitle))
     }
 }
 

@@ -10,6 +10,10 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 
+//protocol AuthenticationFormProtocal {
+//    var from
+//}
+
 @Observable
 @MainActor
 class AuthViewModel{

@@ -33,6 +33,8 @@ struct GoogleMapsLocalResults: Decodable {
         let website: String?
         let description: String?
         let thumbnail: String?
+//        let serviceOptions: ServiceOptions
+
         
         enum CodingKeys: String, CodingKey {
             case title
@@ -75,4 +77,8 @@ struct GoogleMapsLocalResults: Decodable {
             case sunday
         }
     }
+    
+//    struct ServiceOptions: Decodable {
+//
+//    }
 }

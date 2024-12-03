@@ -21,8 +21,9 @@ struct SavedTailorView: View {
                         listView(
                             imageURL: tailor.thumbnail,
                             title: tailor.title,
-                            address: tailor.address,
-                            desciption: tailor.itemDescription
+                            type: tailor.type,
+                            rating: tailor.rating,
+                            reviews: tailor.reviews
                         )
                         .swipeActions {
                             Button {
@@ -31,9 +32,7 @@ struct SavedTailorView: View {
                                 Image(systemName: "trash.fill")
                                     .tint(Color.red)
                             }
-                            
                         }
-                        
                     }
                 }
                 .onAppear {
@@ -55,7 +54,7 @@ struct SavedTailorView: View {
         .background(Color.main)
     }
     
-    private func listView(imageURL: String?, title: String, address: String, desciption: String?) -> some View {
+    private func listView(imageURL: String?, title: String, type: String, rating: Float?, reviews: Int?) -> some View {
         HStack(alignment: .top) {
             disPlayUrlImage(url: imageURL)
                 .frame(width: 100, height: 100)
@@ -65,11 +64,16 @@ struct SavedTailorView: View {
                 VStack(alignment: .leading) {
                     Text(title)
                         .font(.headline)
-                    Text(address)
+                    Text(type)
                         .font(.subheadline)
-                    Text(desciption ?? "Np description")
+                        .foregroundStyle(Color.orange)
+                    Text("rating: \(String(format: "%.1f", rating ?? 0.0))")
                         .font(.subheadline)
-                        .lineLimit(2)
+                    Text("reviews: \(reviews ?? 0)")
+                        .font(.subheadline)
+//                    Text(desciption ?? "Np description")
+//                        .font(.subheadline)
+//                        .lineLimit(2)
                 }
                 .padding(.leading, 10)
             }

@@ -80,12 +80,20 @@ struct SearchTailorView: View {
         List {
             if let localResult = viewModel.searchGoogleLocalResult {
                 ForEach(localResult, id: \.title) { tailor in
+//                    listItem(
+//                        imageUrl: tailor.thumbnail ?? "Unknown",
+//                        title: tailor.title,
+//                        address: tailor.address,
+//                        description: tailor.description,
+//                        localResult: tailor)
                     listItem(
-                        imageUrl: tailor.thumbnail ?? "Unknown",
+                        imageUrl: tailor.thumbnail,
                         title: tailor.title,
-                        address: tailor.address,
-                        description: tailor.description,
-                        localResult: tailor)
+                        rating: tailor.rating,
+                        type: tailor.type,
+                        reviews: tailor.reviews,
+                        localResult: tailor
+                    )
                     .swipeActions(content: {
                         Button {
                             swiftDataVM.saveLocalResult(localResult: tailor)
@@ -103,16 +111,17 @@ struct SearchTailorView: View {
     }
     
     private func listItem(
-        imageUrl: String,
+        imageUrl: String?,
         title: String,
-        address: String,
-        description: String?,
+        rating: Float?,
+        type: String,
+        reviews: Int?,
         localResult: GoogleMapsLocalResults.LocalResults
     ) -> some View {
         HStack(alignment: .top) {
             NavigationLink {
-                TailorDetillView(tailor: localResult)
-                    .navigationBarBackButtonHidden(true)
+                TailorDetailView(tailor: localResult)
+//                    .navigationBarBackButtonHidden(true)
             } label: {
                 disPlayUrlImage(url: localResult.thumbnail)
                     .frame(width: 100, height: 100)
@@ -122,11 +131,13 @@ struct SearchTailorView: View {
                     VStack(alignment: .leading) {
                         Text(localResult.title)
                             .font(.headline)
-                        Text(localResult.address)
+                        Text(localResult.type)
                             .font(.subheadline)
-                        Text(localResult.description ?? "No description")
+                            .foregroundStyle(Color.orange)
+                        Text("rating: \(String(format: "%.1f", localResult.rating ?? 0.0))")
                             .font(.subheadline)
-                            .lineLimit(3)
+                        Text("reviews: \(localResult.reviews ?? 0)")
+                            .font(.subheadline)
                     }
                     .padding(.leading, 10)
                 }

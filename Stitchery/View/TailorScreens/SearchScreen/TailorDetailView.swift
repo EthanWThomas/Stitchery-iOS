@@ -7,9 +7,12 @@
 
 import SwiftUI
 
-struct TailorDetillView: View {
+struct TailorDetailView: View {
     var tailor: GoogleMapsLocalResults.LocalResults
+    
     @Environment(\.dismiss) var dismiss
+    
+    @State var openStateExpanded = false
     
     var body: some View {
         title
@@ -26,25 +29,28 @@ struct TailorDetillView: View {
     
     private var aboutView: some View {
         VStack(alignment: .center, spacing: 15) {
-            HStack {
-                Text(tailor.title)
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Color.black)
-                Spacer()
-                backButton
-            }
-            
+            Text(tailor.title)
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundStyle(Color.black)
             List {
                 Section("Links") {
                     Text("Address: \(tailor.address)")
                         .font(.subheadline)
                     Text("Phone Number: \(tailor.phone ?? "No Phone Number")")
                         .font(.subheadline)
-                    Link(destination: URL(string: tailor.website ?? "UnKnown")!) {
-                        Text(tailor.website ?? "No Website yet")
-                            .underline()
+                    
+                    if let website = tailor.website, !website.isEmpty {
+                        Link(destination: URL(string: tailor.website ?? "UnKnown")!) {
+                            Text(tailor.website ?? "This Tailor has no website")
+                                .underline()
+                                .foregroundStyle(Color.blue)
+                                .font(.subheadline)
+                        }
+                    } else {
+                        Text("This Tailor has no website")
                             .font(.subheadline)
+                            .foregroundStyle(Color.red)
                     }
                 }
                 
@@ -62,7 +68,12 @@ struct TailorDetillView: View {
                     }
                 }
                 
-                Section("Open Hours: \(tailor.openState ?? "This website has no Open Hours.")") {
+                Section("Pricing") {
+                    Text(tailor.price ?? "This tailor has no pricing set up")
+                        .font(.subheadline)
+                }
+                
+                Section("Open Hours: \(tailor.openState ?? "This website has no Open Hours.")", isExpanded: $openStateExpanded) {
                     Text("monday: \(tailor.operatingHours?.monday ?? "This website has no hours on monday.")")
                     Text("tuesday: \(tailor.operatingHours?.tuesday ?? "This website has no hours on tuesday.")")
                     Text("wednesday: \(tailor.operatingHours?.wednesday ?? "This website has no hours on wednesday.")")
@@ -72,6 +83,7 @@ struct TailorDetillView: View {
                     Text("sunday: \(tailor.operatingHours?.sunday ?? "This website has no hours on sunday.")")
                 }
             }
+            .listStyle(.sidebar)
         }
     }
     
