@@ -14,32 +14,45 @@ struct SavedTailorView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(viewModel.localResultResponseModel, id: \.title) { tailor in
-                    listView(
-                        imageURL: tailor.thumbnail,
-                        title: tailor.title,
-                        address: tailor.address,
-                        desciption: tailor.itemDescription
-                    )
-                    .swipeActions {
-                        Button {
-                            viewModel.deleteLocalResult(localResult: tailor)
-//                            viewModel.deleteLocalResult(localResult: tailor)
-                        } label: {
-                            Image(systemName: "trash.fill")
-                                .tint(Color.red)
+            VStack(spacing: 1) {
+                titleScreen
+                List {
+                    ForEach(viewModel.localResultResponseModel, id: \.title) { tailor in
+                        listView(
+                            imageURL: tailor.thumbnail,
+                            title: tailor.title,
+                            address: tailor.address,
+                            desciption: tailor.itemDescription
+                        )
+                        .swipeActions {
+                            Button {
+                                viewModel.deleteLocalResult(localResult: tailor)
+                            } label: {
+                                Image(systemName: "trash.fill")
+                                    .tint(Color.red)
+                            }
+                            
                         }
-
+                        
                     }
-                    
+                }
+                .onAppear {
+                    viewModel.fetchLocalResult()
                 }
             }
-            .navigationTitle("Saved Tailor Screen")
-            .onAppear {
-                viewModel.fetchLocalResult()
-            }
         }
+    }
+    
+    private var titleScreen: some View {
+        VStack {
+            Text("Saved Tailor Screen")
+                .fontWeight(.semibold)
+                .font(.largeTitle)
+                .foregroundStyle(Color.text)
+                .shadow(color: .primary.opacity(0.15), radius: 10, x: 0, y: 0)
+        }
+        .frame(width: 450, height: 40)
+        .background(Color.main)
     }
     
     private func listView(imageURL: String?, title: String, address: String, desciption: String?) -> some View {

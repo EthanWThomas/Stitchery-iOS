@@ -350,8 +350,8 @@
             filePath = "Stitchery/View/TailorScreens/SearchScreen/SearchTailorView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "tailorListView"
             landmarkType = "24">
          </BreakpointContent>
@@ -366,8 +366,8 @@
             filePath = "Stitchery/View/TailorScreens/SearchScreen/SearchTailorView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "tailorListView"
             landmarkType = "24">
          </BreakpointContent>
@@ -434,36 +434,6 @@
             endingLineNumber = "82"
             landmarkName = "sigInView"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "90178BA8-CEB6-4761-9A87-E2E50F8A2809 - 3907066004b509ec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82">
-               </Location>
-               <Location
-                  uuid = "90178BA8-CEB6-4761-9A87-E2E50F8A2809 - f567056674deb07b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Stitchery.StitcheryUser, Stitchery.GoogleSignInError&gt;) -&gt; () in closure #4 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.NavigationLink&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;, &lt;&lt;opaque return type of SwiftUI.View.navigationBarBackButtonHidden(Swift.Bool) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer)&gt; in Stitchery.SignInView.sigInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -485,22 +455,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8AE62D84-2807-4914-AACC-DFA35273E31A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stitchery/View/TailorScreens/SignUpScreen/SignInView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "sigInView"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "369F4A39-DF14-4F17-9DE8-D19BAE34E7F4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -512,36 +466,6 @@
             endingLineNumber = "97"
             landmarkName = "logInView"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "369F4A39-DF14-4F17-9DE8-D19BAE34E7F4 - 422896a72a03184b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Button&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;&gt;&gt;, SwiftUI.Spacer)&gt; in Stitchery.RegistrationView.logInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97">
-               </Location>
-               <Location
-                  uuid = "369F4A39-DF14-4F17-9DE8-D19BAE34E7F4 - a98e00acc4be6ce5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Stitchery.StitcheryUser, Stitchery.GoogleSignInError&gt;) -&gt; () in closure #4 @Swift.MainActor () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Button&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text)&gt;&gt;&gt;, SwiftUI.Spacer)&gt; in Stitchery.RegistrationView.logInView.getter : some"
-                  moduleName = "Stitchery.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ethanthomas/Documents/IOS/Stitchery/Stitchery/View/TailorScreens/SignUpScreen/RegistrationView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -557,22 +481,6 @@
             startingLineNumber = "101"
             endingLineNumber = "101"
             landmarkName = "logInView"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5BA885C9-E23D-4DD0-A4F5-68728140D6DE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stitchery/View/HomeScreen/Home.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>

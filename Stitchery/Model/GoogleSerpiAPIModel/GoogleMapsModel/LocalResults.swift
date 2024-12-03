@@ -28,6 +28,7 @@ struct GoogleMapsLocalResults: Decodable {
         let types: [String]?
         let address: String
         let openState: String?
+        let operatingHours: OperatingHours?
         let phone: String?
         let website: String?
         let description: String?
@@ -51,6 +52,27 @@ struct GoogleMapsLocalResults: Decodable {
             case website
             case description
             case thumbnail = "thumbnail"
+            case operatingHours = "operating_hours"
+        }
+    }
+    
+    struct OperatingHours: Decodable {
+        var monday: String
+        var tuesday: String
+        var wednesday: String
+        var thursday: String
+        var friday: String
+        var saturday: String
+        var sunday: String
+        
+        enum CodingKeys: String, CodingKey {
+            case monday
+            case tuesday
+            case wednesday
+            case thursday
+            case friday
+            case saturday
+            case sunday
         }
     }
 }

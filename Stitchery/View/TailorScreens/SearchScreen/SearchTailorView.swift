@@ -35,7 +35,7 @@ struct SearchTailorView: View {
                 .foregroundStyle(Color.text)
                 .shadow(color: .primary.opacity(0.15), radius: 10, x: 0, y: 0)
         }
-        .frame(width: 450, height: 80)
+        .frame(width: 450, height: 50)
         .background(Color.main)
     }
     
@@ -84,7 +84,8 @@ struct SearchTailorView: View {
                         imageUrl: tailor.thumbnail ?? "Unknown",
                         title: tailor.title,
                         address: tailor.address,
-                        description: tailor.description)
+                        description: tailor.description,
+                        localResult: tailor)
                     .swipeActions(content: {
                         Button {
                             swiftDataVM.saveLocalResult(localResult: tailor)
@@ -105,34 +106,30 @@ struct SearchTailorView: View {
         imageUrl: String,
         title: String,
         address: String,
-        description: String?
+        description: String?,
+        localResult: GoogleMapsLocalResults.LocalResults
     ) -> some View {
         HStack(alignment: .top) {
-            disPlayUrlImage(url: imageUrl)
-                .frame(width: 100, height: 100)
-                .cornerRadius(10)
-            
-            HStack(alignment: .center) {
-                VStack(alignment: .leading) {
-                    Text(title)
-                        .font(.headline)
-                    Text(address)
-                        .font(.subheadline)
-                    Text(description ?? "No description")
-                        .font(.subheadline)
-                        .lineLimit(3)
+            NavigationLink {
+                TailorDetillView(tailor: localResult)
+                    .navigationBarBackButtonHidden(true)
+            } label: {
+                disPlayUrlImage(url: localResult.thumbnail)
+                    .frame(width: 100, height: 100)
+                    .cornerRadius(10)
+                
+                HStack(alignment: .center) {
+                    VStack(alignment: .leading) {
+                        Text(localResult.title)
+                            .font(.headline)
+                        Text(localResult.address)
+                            .font(.subheadline)
+                        Text(localResult.description ?? "No description")
+                            .font(.subheadline)
+                            .lineLimit(3)
+                    }
+                    .padding(.leading, 10)
                 }
-                .padding(.leading, 10)
-            }
-        }
-    }
-    
-    private var topbarDisplay: some View {
-        ZStack {
-            VStack(alignment: .leading) {
-                Rectangle()
-                    .frame(width: 420, height: 110)
-                    .foregroundStyle(Color.main)
             }
         }
     }
@@ -146,7 +143,7 @@ struct SearchTailorView: View {
                     image
                         .resizable()
                 default:
-                    Image(systemName: "x.circle.fill")
+                    Image(systemName: "building")
                         .tint(Color.red)
             }
         }

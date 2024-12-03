@@ -24,7 +24,8 @@ enum GoogleSignInError: Error {
     case authSignInError
 }
 
-final class AuthManger {
+final class AuthManger: Observable {
+    var userSession: FirebaseAuth.User?
     
     static let shared = AuthManger()
     
@@ -36,7 +37,6 @@ final class AuthManger {
         }
         
         return StitcheryUser(Uid: authUser.uid, name: authUser.displayName ?? "Unknown", email: authUser.email, photoURL: authUser.photoURL?.absoluteString)
-//        return User(id: authUser.uid, fullname: authUser.displayName ?? "Unknown", email: authUser.email ?? "Unknown", photoUrl: authUser.photoURL?.absoluteString)
     }
     
     func SignInWithGoogle(completion: @escaping (Result<StitcheryUser, GoogleSignInError>) -> Void) {
@@ -82,7 +82,11 @@ final class AuthManger {
         }
     }
     
-    func signOut() throws {
-        try auth.signOut()
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
