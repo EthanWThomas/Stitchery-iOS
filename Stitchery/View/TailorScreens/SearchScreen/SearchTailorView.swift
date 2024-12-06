@@ -80,12 +80,6 @@ struct SearchTailorView: View {
         List {
             if let localResult = viewModel.searchGoogleLocalResult {
                 ForEach(localResult, id: \.title) { tailor in
-//                    listItem(
-//                        imageUrl: tailor.thumbnail ?? "Unknown",
-//                        title: tailor.title,
-//                        address: tailor.address,
-//                        description: tailor.description,
-//                        localResult: tailor)
                     listItem(
                         imageUrl: tailor.thumbnail,
                         title: tailor.title,
@@ -116,8 +110,7 @@ struct SearchTailorView: View {
         rating: Float?,
         type: String,
         reviews: Int?,
-        localResult: GoogleMapsLocalResults.LocalResults
-    ) -> some View {
+        localResult: GoogleMapsLocalResults.LocalResults) -> some View {
         HStack(alignment: .top) {
             NavigationLink {
                 TailorDetailView(tailor: localResult)

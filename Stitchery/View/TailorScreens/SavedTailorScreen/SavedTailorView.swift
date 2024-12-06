@@ -18,11 +18,19 @@ struct SavedTailorView: View {
                 titleScreen
                 List {
                     ForEach(viewModel.localResultResponseModel, id: \.title) { tailor in
+//                        listView(
+//                            imageURL: tailor.thumbnail,
+//                            title: tailor.title,
+//                            type: tailor.type,
+//                            rating: tailor.rating,
+//                            reviews: tailor.reviews
+//                        )
                         listView(
                             imageURL: tailor.thumbnail,
                             title: tailor.title,
                             type: tailor.type,
                             rating: tailor.rating,
+                            localResultDataModel: tailor,
                             reviews: tailor.reviews
                         )
                         .swipeActions {
@@ -54,28 +62,35 @@ struct SavedTailorView: View {
         .background(Color.main)
     }
     
-    private func listView(imageURL: String?, title: String, type: String, rating: Float?, reviews: Int?) -> some View {
+    private func listView(
+        imageURL: String?,
+        title: String,
+        type: String,
+        rating: Float?,
+        localResultDataModel: LocalResultsDataModel,
+        reviews: Int?) -> some View {
         HStack(alignment: .top) {
-            disPlayUrlImage(url: imageURL)
-                .frame(width: 100, height: 100)
-                .cornerRadius(10)
-            
-            HStack(alignment: .center) {
-                VStack(alignment: .leading) {
-                    Text(title)
-                        .font(.headline)
-                    Text(type)
-                        .font(.subheadline)
-                        .foregroundStyle(Color.orange)
-                    Text("rating: \(String(format: "%.1f", rating ?? 0.0))")
-                        .font(.subheadline)
-                    Text("reviews: \(reviews ?? 0)")
-                        .font(.subheadline)
-//                    Text(desciption ?? "Np description")
-//                        .font(.subheadline)
-//                        .lineLimit(2)
+            NavigationLink {
+                SaveTailorDetailView(tailor: localResultDataModel)
+            } label: {
+                disPlayUrlImage(url: localResultDataModel.thumbnail)
+                    .frame(width: 100, height: 100)
+                    .cornerRadius(10)
+                
+                HStack(alignment: .center) {
+                    VStack(alignment: .leading) {
+                        Text(localResultDataModel.title)
+                            .font(.headline)
+                        Text(localResultDataModel.type)
+                            .font(.subheadline)
+                            .foregroundStyle(Color.orange)
+                        Text("rating: \(String(format: "%.1f", localResultDataModel.rating ?? 0.0))")
+                            .font(.subheadline)
+                        Text("reviews: \(localResultDataModel.reviews ?? 0)")
+                            .font(.subheadline)
+                    }
+                    .padding(.leading, 10)
                 }
-                .padding(.leading, 10)
             }
         }
     }

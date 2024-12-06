@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class LocalResultsDataModel {
+class LocalResultsDataModel {
     var title: String
     var placeId: String?
     var placeIdSearch: String?
@@ -26,8 +26,9 @@ final class LocalResultsDataModel {
     var website: String?
     var itemDescription: String?
     var thumbnail: String?
+    var operatingHours: GoogleMapsLocalResults.OperatingHours?
     
-    init(title: String, placeId: String? = nil, placeIdSearch: String? = nil, photoslink: String? = nil, reviews: Int? = nil, rating: Float? = nil, price: String? = nil, hours: String? = nil, type: String, types: [String]? = nil, address: String, openState: String? = nil, phone: String? = nil, website: String? = nil, itemDescription: String? = nil, thumbnail: String? = nil) {
+    init(title: String, placeId: String? = nil, placeIdSearch: String? = nil, photoslink: String? = nil, reviews: Int? = nil, rating: Float? = nil, price: String? = nil, hours: String? = nil, type: String, types: [String]? = nil, address: String, openState: String? = nil, phone: String? = nil, website: String? = nil, itemDescription: String? = nil, thumbnail: String? = nil, operatingHours: GoogleMapsLocalResults.OperatingHours? = nil) {
         self.title = title
         self.placeId = placeId
         self.placeIdSearch = placeIdSearch
@@ -44,8 +45,30 @@ final class LocalResultsDataModel {
         self.website = website
         self.itemDescription = itemDescription
         self.thumbnail = thumbnail
+        self.operatingHours = operatingHours
     }
 }
+
+//@Model
+//class OperatingHours {
+//    var monday: String
+//    var tuesday: String
+//    var wednesday: String
+//    var thursday: String
+//    var friday: String
+//    var saturday: String
+//    var sunday: String
+//    
+//    init(monday: String, tuesday: String, wednesday: String, thursday: String, friday: String, saturday: String, sunday: String) {
+//        self.monday = monday
+//        self.tuesday = tuesday
+//        self.wednesday = wednesday
+//        self.thursday = thursday
+//        self.friday = friday
+//        self.saturday = saturday
+//        self.sunday = sunday
+//    }
+//}
 
 // Interacts with API
 //struct DataResponse: Decodable {

@@ -1,14 +1,15 @@
 //
-//  TailorDetillView.swift
+//  SaveTailorDetailView.swift
 //  Stitchery
 //
-//  Created by Ethan Thomas on 11/13/24.
+//  Created by Ethan Thomas on 12/3/24.
 //
 
 import SwiftUI
+import SwiftData
 
-struct TailorDetailView: View {
-    var tailor: GoogleMapsLocalResults.LocalResults
+struct SaveTailorDetailView: View {
+    var tailor: LocalResultsDataModel
     
     @Environment(\.dismiss) var dismiss
     
@@ -55,7 +56,7 @@ struct TailorDetailView: View {
                 }
                 
                 Section("More info about \(tailor.title)") {
-                    Text(tailor.description ?? "This website has no description")
+                    Text(tailor.itemDescription ?? "This website has no description")
                         .font(.subheadline)
                         .multilineTextAlignment(.leading)
                 }
@@ -74,13 +75,13 @@ struct TailorDetailView: View {
                 }
                 
                 Section("Open Hours: \(tailor.openState ?? "This website has no Open Hours.")", isExpanded: $openStateExpanded) {
-                    Text("monday: \(tailor.operatingHours?.monday ?? "This website has no hours on monday.")")
-                    Text("tuesday: \(tailor.operatingHours?.tuesday ?? "This website has no hours on tuesday.")")
-                    Text("wednesday: \(tailor.operatingHours?.wednesday ?? "This website has no hours on wednesday.")")
-                    Text("thursday: \(tailor.operatingHours?.thursday ?? "This website has no hours on thursday.")")
-                    Text("friday: \(tailor.operatingHours?.friday ?? "This website has no hours on friday.")")
-                    Text("saturday: \(tailor.operatingHours?.saturday ?? "This website has no hours on saturday.")")
-                    Text("sunday: \(tailor.operatingHours?.sunday ?? "This website has no hours on sunday.")")
+                    Text("monday: \(tailor.operatingHours?.monday ?? "No operating hours information available.")")
+                    Text("tuesday: \(tailor.operatingHours?.tuesday ?? "No operating hours information available.")")
+                    Text("wednesday: \(tailor.operatingHours?.wednesday ?? "No operating hours information available.")")
+                    Text("thursday: \(tailor.operatingHours?.thursday ?? "No operating hours information available.")")
+                    Text("friday: \(tailor.operatingHours?.friday ?? "No operating hours information available.")")
+                    Text("saturday: \(tailor.operatingHours?.saturday ?? "No operating hours information available.")")
+                    Text("sunday: \(tailor.operatingHours?.sunday ?? "No operating hours information available.")")
                 }
             }
             .listStyle(.sidebar)
@@ -123,8 +124,10 @@ struct TailorDetailView: View {
             }
         }
     }
+    
+    
 }
 
 //#Preview {
-//    TailorDetillView()
+//    SaveTailorDetailView()
 //}

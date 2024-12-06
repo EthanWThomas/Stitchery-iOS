@@ -11,6 +11,13 @@ struct ProfileScreen: View {
     
     @Environment(AuthViewModel.self) var viewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) private var presentationMode
+    
+    @State var showSignIn: Bool
+    
+    init(showSignIn: Bool = true) {
+        self.showSignIn = AuthManger.shared.getCurrentUser() == nil
+    }
     
     var body: some View {
         VStack {
@@ -162,7 +169,7 @@ struct ProfileScreen: View {
                 Button {
                     do {
                         try AuthManger.shared.signOut()
-                        dismiss()
+                        self.presentationMode.wrappedValue.dismiss()
                     } catch {
                         print("error signing out")
                     }

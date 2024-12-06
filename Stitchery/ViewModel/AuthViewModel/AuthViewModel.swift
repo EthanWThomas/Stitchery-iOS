@@ -9,17 +9,24 @@ import Foundation
 import FirebaseAuth
 import Firebase
 import FirebaseFirestore
+import GoogleSignIn
+import GoogleSignInSwift
 
-//protocol AuthenticationFormProtocal {
-//    var from
-//}
+protocol AuthenticationFormProtocal {
+    var formIsValid: Bool { get }
+}
+
+enum UserSignError: Error {
+    case unableToGrabToVC
+    case signInPressentationError
+    case authSignInError
+}
 
 @Observable
 @MainActor
 class AuthViewModel{
     var userSession: FirebaseAuth.User?
     var currentUser: User?
-    var user = [User]()
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -28,6 +35,19 @@ class AuthViewModel{
             await fetchUser()
         }
     }
+    
+//    func signInWithGoogle(completion: @escaping (Result<User, UserSignError>) -> Void) {
+//        let clientID = "208798065261-ts2lhecest9rrbih6l9832jpmpgcd1re.apps.googleusercontent.com"
+//        let config = GIDConfiguration(clientID: clientID)
+//        GIDSignIn.sharedInstance.configuration = config
+//        
+//        guard let topVC = UIApplication.getTopViewController() else {
+//            completion(.failure(.unableToGrabToVC))
+//            return
+//        }
+//        
+//        let credent
+//    }
     
     func signIn(with email: String, password: String) async throws {
         do {
@@ -62,6 +82,7 @@ class AuthViewModel{
         }
     }
     
+    // MARK: Make deleteAccount function
     func deleteAccount() {
         
     }

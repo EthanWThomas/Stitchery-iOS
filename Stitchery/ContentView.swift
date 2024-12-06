@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State var showSignIn: Bool
     
+//    @State var viewModel = AuthViewModel()
+    
     @Environment(AuthViewModel.self) var viewModel
     
     init(showSignIn: Bool = true, showSigInScreen: Bool = true) {
@@ -17,15 +19,14 @@ struct ContentView: View {
     }
     
     var body: some View {
-        if showSignIn {
-            SignInView(showSigInScreen: $showSignIn)
-        } else {
-            NavigationStack {
-                ZStack {
-                    ProfileScreen()
-                }
-            }
+        NavigationStack {
+//            if viewModel.isSignedIn {
+//                ProfileScreen()
+//            } else {
+//                SignInView(showSigInScreen: .constant(true))
+//            }
         }
+        .environment(viewModel)
     }
 }
 

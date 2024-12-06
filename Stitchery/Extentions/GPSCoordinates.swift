@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GPSCoordinates: Decodable {
+struct GPSCoordinates: Codable {
     let latitude: Double?
     let longitude: Double?
     

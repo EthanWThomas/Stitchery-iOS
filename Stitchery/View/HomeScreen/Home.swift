@@ -43,25 +43,19 @@ struct Home: View {
                         .background(Color.buttons)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                 }
-                if showSignIn {
-                    NavigationLink {
-                        SignInView(showSigInScreen: $showSignIn)
-                            .navigationBarBackButtonHidden(true)
-                    } label: {
-                        Text("User Sign Up")
-                            .font(.title)
-                            .foregroundStyle(Color.black)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.buttons)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                    }
-                    Spacer()
-                } else {
-                    NavigationStack {
-                        ProfileScreen()
-                    }
+                NavigationLink {
+                    SignInView(showSigInScreen: $showSignIn)
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Text("User Sign Up")
+                        .font(.title)
+                        .foregroundStyle(Color.black)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.buttons)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
                 }
+                Spacer()
             }
             .padding()
             .background(Color.main)

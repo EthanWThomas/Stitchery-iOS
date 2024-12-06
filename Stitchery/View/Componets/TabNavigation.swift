@@ -37,7 +37,8 @@ struct TabNavigation: View {
                 MessageRoom()
                     .tag(3)
                 
-                MapView()
+                MapView(context: ModelContext(cantainer))
+                    .modelContainer(cantainer)
                     .tag(4)
             }
             .overlay(alignment: .bottomTrailing) {
