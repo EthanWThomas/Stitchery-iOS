@@ -9,8 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct SearchTailorView: View {
-    
     @StateObject private var viewModel = LocalResultViewModel()
+//    @StateObject var locationManager = LocationManager()
+    
     @State var swiftDataVM: GoogleMapVM
     
     init(context: ModelContext) {
@@ -100,7 +101,7 @@ struct SearchTailorView: View {
             }
         }
         .onAppear {
-            viewModel.searchForLocalResult()
+            viewModel.searchForLocalResultWithaLocation()
         }
     }
     

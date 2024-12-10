@@ -10,13 +10,6 @@ import GoogleSignIn
 import GoogleSignInSwift
 
 struct Home: View {
-    
-    @State var showSignIn: Bool
-    
-    init(showSignIn: Bool = true, showSigInScreen: Bool = true) {
-        self.showSignIn = AuthManger.shared.getCurrentUser() == nil
-    }
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -44,7 +37,7 @@ struct Home: View {
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                 }
                 NavigationLink {
-                    SignInView(showSigInScreen: $showSignIn)
+                    SignInView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
                     Text("User Sign Up")

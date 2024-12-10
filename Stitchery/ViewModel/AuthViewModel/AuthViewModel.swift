@@ -24,9 +24,11 @@ enum UserSignError: Error {
 
 @Observable
 @MainActor
-class AuthViewModel{
+class AuthViewModel {
     var userSession: FirebaseAuth.User?
     var currentUser: User?
+    
+    let auth = Auth.auth()
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -36,18 +38,51 @@ class AuthViewModel{
         }
     }
     
-//    func signInWithGoogle(completion: @escaping (Result<User, UserSignError>) -> Void) {
-//        let clientID = "208798065261-ts2lhecest9rrbih6l9832jpmpgcd1re.apps.googleusercontent.com"
-//        let config = GIDConfiguration(clientID: clientID)
-//        GIDSignIn.sharedInstance.configuration = config
-//        
-//        guard let topVC = UIApplication.getTopViewController() else {
-//            completion(.failure(.unableToGrabToVC))
-//            return
-//        }
-//        
-//        let credent
-//    }
+//    func getCurrentUser() -> User? {
+//           guard let authUser = auth.currentUser else {
+//               return nil
+//           }
+//           
+////           return StitcheryUser(Uid: authUser.uid, name: authUser.displayName ?? "Unknown", email: authUser.email, photoURL: authUser.photoURL?.absoluteString)
+//       }
+    
+    func signInWithGoogle(completion: @escaping (Result<User, UserSignError>) -> Void) {
+        let clientID = "208798065261-ts2lhecest9rrbih6l9832jpmpgcd1re.apps.googleusercontent.com"
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+        
+        guard let topVC = UIApplication.getTopViewController() else {
+            completion(.failure(.unableToGrabToVC))
+            return
+        }
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: topVC) { [unowned self] result, error in
+            guard let user = result?.user,
+                  let idToken = user.idToken?.tokenString
+            else {
+                completion(.failure(.signInPressentationError))
+                return
+            }
+            
+            let credential = GoogleAuthProvider.credential(
+                withIDToken: idToken,
+                accessToken: user.accessToken.tokenString)
+            
+            auth.signIn(with: credential) { result, error in
+                guard let result = result, error == nil else {
+                    completion(.failure(.authSignInError))
+                    return
+                }
+                
+                let user = User(
+                    id: result.user.uid,
+                    fullname: result.user.displayName ?? "Unknown",
+                    email: result.user.email ?? "Unknown",
+                    photoUrl: result.user.photoURL?.absoluteString)
+                completion(.success(user))
+            }
+        }
+    }
     
     func signIn(with email: String, password: String) async throws {
         do {

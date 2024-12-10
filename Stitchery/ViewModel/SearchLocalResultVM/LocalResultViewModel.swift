@@ -13,9 +13,9 @@ class LocalResultViewModel: ObservableObject {
     @Published private(set) var errorMessage: String?
     
     @Published var searchText = ""
-    @Published var latitude = ""
-    @Published var longitude = ""
-    
+//    @Published var latitude = ""
+//    @Published var longitude = ""
+    @Published var location = LocationManager()
     
     @Published var localResult = [GoogleMapsLocalResults.LocalResults]()
     
@@ -57,14 +57,20 @@ class LocalResultViewModel: ObservableObject {
                 guard let searchText = self?.searchText
                 else { return }
                 
-                guard let latitude = self?.latitude
+                guard let location = self?.location
                 else { return }
                 
-                guard let longitude = self?.longitude
-                else { return }
-                
-                let result = try await self?.apiManager.seacrhGoogleMapLocalResultWithLatitudeAndlongitude(search: searchText, latitude: latitude, longitude: longitude).localResults
+                let result = try await self?.apiManager.seacrhGoogleMapLocalResultWithLatitudeAndlongitude(search: searchText, location: location).localResults
                 self?.isLoading = false
+                
+//                guard let latitude = self?.latitude
+//                else { return }
+//                
+//                guard let longitude = self?.longitude
+//                else { return }
+//                
+//                let result = try await self?.apiManager.seacrhGoogleMapLocalResultWithLatitudeAndlongitude(search: searchText, latitude: latitude, longitude: longitude).localResults
+//                self?.isLoading = false
                 
                 await MainActor.run { [weak self] in
                     self?.localResult = result!

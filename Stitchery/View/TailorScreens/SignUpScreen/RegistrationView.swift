@@ -19,8 +19,6 @@ struct RegistrationView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(AuthViewModel.self) var viewModel
     
-    @Binding var showSigInScreen: Bool
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -113,11 +111,10 @@ struct RegistrationView: View {
             .padding(.top, 24)
             
             Button {
-                AuthManger.shared.SignInWithGoogle { result in
+                viewModel.signInWithGoogle { result in
                     switch result {
                         case .success(_):
-//                            break
-                            showSigInScreen = false
+                            break
                         case .failure(let error):
                             print(error.localizedDescription)
                     }

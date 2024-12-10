@@ -13,11 +13,11 @@ struct ProfileScreen: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.presentationMode) private var presentationMode
     
-    @State var showSignIn: Bool
+//    @State var showSignIn: Bool
     
-    init(showSignIn: Bool = true) {
-        self.showSignIn = AuthManger.shared.getCurrentUser() == nil
-    }
+//    init(showSignIn: Bool = true) {
+//        self.showSignIn = AuthManger.shared.getCurrentUser() == nil
+//    }
     
     var body: some View {
         VStack {
@@ -143,16 +143,16 @@ struct ProfileScreen: View {
 //                        }
 //                    }
 //                }
-            } else if let googleUser = AuthManger.shared.getCurrentUser() {
+            } else if let googleUser = viewModel.currentUser {
                 VStack(spacing: 0) {
                     VStack {
-                        displayPhoto(photo: googleUser.photoURL)
+                        displayPhoto(photo: googleUser.photoUrl)
                             .offset(x: 0, y: 55)
                     }
                     .frame(maxWidth: .infinity)
                     .background(Color.main)
                     .padding(.bottom, 55)
-                    Text(googleUser.name)
+                    Text(googleUser.fullname)
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .padding()
@@ -167,12 +167,7 @@ struct ProfileScreen: View {
         List {
             Section("Account") {
                 Button {
-                    do {
-                        try AuthManger.shared.signOut()
-                        self.presentationMode.wrappedValue.dismiss()
-                    } catch {
-                        print("error signing out")
-                    }
+                    viewModel.signOut()
                 } label: {
                     SettingRowView(
                         imageName: "arrow.left.circle.fill",
@@ -232,6 +227,6 @@ struct ProfileScreen: View {
     }
 }
 
-#Preview {
-    ProfileScreen()
-}
+//#Preview {
+//    ProfileScreen()
+//}

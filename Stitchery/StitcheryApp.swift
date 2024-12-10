@@ -37,14 +37,12 @@ struct StitcheryApp: App {
 
 struct RootView: View {
     @State var viewModel = AuthViewModel()
-    @State var showHomeScreen = true
+//    @State var showHomeScreen = true
     
     var body: some View {
         Group {
             if viewModel.userSession != nil {
-                if (AuthManger.shared.getCurrentUser() != nil) {
-                    TabNavigation()
-                }
+                TabNavigation()
             } else {
                 Home()
             }

@@ -24,13 +24,10 @@ extension SerpAPIManager {
         }
     }
     
-    func seacrhGoogleMapLocalResultWithLatitudeAndlongitude(
-        search query: String,
-        latitude: String,
-        longitude: String
-    ) async throws -> GoogleMapsLocalResults {
-        guard let url = URL(
-            string: "https://serpapi.com/search.json?engine=google_maps&q=\(query)&ll=\(latitude)-\(longitude)&google_domain=google.com&type=search&api_key=\(SerpAPIManager.apiKey)")
+    func seacrhGoogleMapLocalResultWithLatitudeAndlongitude(search query: String, location: LocationManager) async throws -> GoogleMapsLocalResults {
+        guard let location = location.location
+        else { throw LocationError.failedToGetLocation }
+        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=\(query)&||=\(location.latitude)-\(location.longitude)&google_domain=google.com&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
         else { throw ResquestError.failedToCreateURL }
         
         var request = URLRequest(url: url)

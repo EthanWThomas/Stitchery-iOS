@@ -8,15 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var showSignIn: Bool
-    
-//    @State var viewModel = AuthViewModel()
-    
+//    @StateObject var locationManager = LocationManager()
     @Environment(AuthViewModel.self) var viewModel
-    
-    init(showSignIn: Bool = true, showSigInScreen: Bool = true) {
-        self.showSignIn = AuthManger.shared.getCurrentUser() == nil
-    }
     
     var body: some View {
         NavigationStack {
