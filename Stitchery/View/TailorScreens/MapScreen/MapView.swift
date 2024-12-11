@@ -13,32 +13,35 @@ struct MapView: View {
     let manger = CLLocationManager()
     
     @State private var cameraPostion: MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var visibleRegion: MKCoordinateRegion?
+    @State private var searchText = ""
+    @State private var isManualMarker = false
+    @State private var selectedPlacemark: MTPlacemark?
+    @State var viewModel: MapManagerViewModel
     
-    @State var viewModel: MapManager
+    @FocusState private var seacrhFielsFocus: Bool
     
     init(context: ModelContext) {
-        self.viewModel = MapManager(context: context)
+        self.viewModel = MapManagerViewModel(context: context)
     }
     
     var body: some View {
-        userplacementView
-    }
-    
-    private var userplacementView: some View {
-        Map(position: $cameraPostion) {
-            UserAnnotation()
-            ForEach(viewModel.listPlacemarks) { placemark in
-                Marker(coordinate: placemark.coordinate) {
-                    Label(placemark.name, systemImage: "star")
+        MapReader { proxy in
+            Map(position: $cameraPostion) {
+                UserAnnotation()
+                ForEach(viewModel.listPlacemarks) { placemark in
+                    Marker(coordinate: placemark.coordinate) {
+                        Label(placemark.name, systemImage: "star")
+                    }
+                    .tint(.yellow)
                 }
-                .tint(.yellow)
             }
-        }
-        .mapControls({
-            MapUserLocationButton()
-        })
-        .onAppear {
-            manger.requestWhenInUseAuthorization()
+            .mapControls({
+                MapUserLocationButton()
+            })
+            .onAppear {
+                manger.requestWhenInUseAuthorization()
+            }
         }
     }
 }

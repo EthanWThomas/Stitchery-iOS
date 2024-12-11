@@ -143,7 +143,7 @@ struct ProfileScreen: View {
 //                        }
 //                    }
 //                }
-            } else if let googleUser = viewModel.currentUser {
+            } else if let googleUser = viewModel.getGoogleUser() {
                 VStack(spacing: 0) {
                     VStack {
                         displayPhoto(photo: googleUser.photoUrl)

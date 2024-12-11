@@ -7,16 +7,6 @@
 
 import Foundation
 
-//protocol OperatingHoursProtocol {
-//    var monday: String { get }
-//    var tuesday: String { get }
-//    var wednesday: String { get }
-//    var thursday: String { get }
-//    var friday: String { get }
-//    var saturday: String { get }
-//    var sunday: String { get }
-//}
-
 struct GoogleMapsLocalResults: Codable {
     let localResults: [LocalResults]
     

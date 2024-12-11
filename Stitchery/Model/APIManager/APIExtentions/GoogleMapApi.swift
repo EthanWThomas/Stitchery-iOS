@@ -27,7 +27,11 @@ extension SerpAPIManager {
     func seacrhGoogleMapLocalResultWithLatitudeAndlongitude(search query: String, location: LocationManager) async throws -> GoogleMapsLocalResults {
         guard let location = location.location
         else { throw LocationError.failedToGetLocation }
-        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=\(query)&||=\(location.latitude)-\(location.longitude)&google_domain=google.com&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
+        
+        let formattedLatitude = String(format: "%.6f", location.latitude)
+        let formattedLongitude = String(format: "%.6f", location.longitude)
+        
+        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=Tailor&ll=%40\(formattedLatitude)%2C\(formattedLongitude)%2C14z&google_domain=google.com&gI=us&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
         else { throw ResquestError.failedToCreateURL }
         
         var request = URLRequest(url: url)

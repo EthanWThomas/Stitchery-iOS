@@ -12,13 +12,17 @@ import MapKit
 
 @MainActor
 @Observable
-class MapManager {
+class MapManagerViewModel {
     let context: ModelContext
     
     var listPlacemarks = [MTPlacemark]()
+    var destination = [Destination]()
     
     init(context: ModelContext) {
         self.context = context
+        
+        fetchMTPlacemark()
+        fetchDestination()
     }
     
     @MainActor
@@ -46,5 +50,57 @@ class MapManager {
         let searchPredicate = #Predicate<MTPlacemark> { $0.destination == nil }
         try? modelContext.delete(model: MTPlacemark.self, where: searchPredicate)
         try? modelContext.save()
+    }
+}
+
+// MARK: - Fetching
+extension MapManagerViewModel {
+    func fetchMTPlacemark() {
+        do {
+            self.listPlacemarks = try context.fetch(FetchDescriptor<MTPlacemark>())
+        } catch {
+            print("Error fetching MTPlacemar \(error)")
+        }
+    }
+    
+    func fetchDestination() {
+        do {
+            self.destination = try context.fetch(FetchDescriptor<Destination>())
+        } catch {
+            print("Error fetching Destintion \(error)")
+        }
+    }
+}
+
+// MARK: Other, Saving
+extension MapManagerViewModel {
+    func saveMTPlacemark(mtplacemark: MTPlacemark) {
+        let resultModel = MTPlacemark(
+            name: mtplacemark.name,
+            address: mtplacemark.address,
+            latitude: mtplacemark.latitude,
+            longitude: mtplacemark.longitude)
+        context.insert(resultModel)
+        try? context.save()
+        fetchMTPlacemark()
+    }
+    
+    func deleteMtplacemark(mtplacemark: MTPlacemark) {
+        context.delete(mtplacemark)
+        try? context.save()
+        fetchMTPlacemark()
+    }
+    
+    func saveDestination(destination: Destination) {
+        let resultModel = Destination(name: destination.name, placemarks: destination.placemarks)
+        context.insert(resultModel)
+        try? context.save()
+        fetchDestination()
+    }
+    
+    func deleteDestination(destination: Destination) {
+        context.delete(destination)
+        try? context.save()
+        fetchDestination()
     }
 }

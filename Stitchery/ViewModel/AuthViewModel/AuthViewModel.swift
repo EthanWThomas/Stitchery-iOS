@@ -37,14 +37,13 @@ class AuthViewModel {
             await fetchUser()
         }
     }
-    
-//    func getCurrentUser() -> User? {
-//           guard let authUser = auth.currentUser else {
-//               return nil
-//           }
-//           
-////           return StitcheryUser(Uid: authUser.uid, name: authUser.displayName ?? "Unknown", email: authUser.email, photoURL: authUser.photoURL?.absoluteString)
-//       }
+
+    func getGoogleUser() -> User? {
+        guard let authUser = auth.currentUser else {
+            return nil
+        }
+        return User(id: authUser.uid, fullname: authUser.displayName ?? "Unknown", email: authUser.email ?? "Unknown", photoUrl: authUser.photoURL?.absoluteString)
+    }
     
     func signInWithGoogle(completion: @escaping (Result<User, UserSignError>) -> Void) {
         let clientID = "208798065261-ts2lhecest9rrbih6l9832jpmpgcd1re.apps.googleusercontent.com"
