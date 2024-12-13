@@ -10,39 +10,40 @@ import MapKit
 import SwiftData
 
 struct MapView: View {
-    let manger = CLLocationManager()
-    
-    @State private var cameraPostion: MapCameraPosition = .userLocation(fallback: .automatic)
+    @Environment(\.locationManager) var manager
+
+    @State private var cameraPosoition: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var visibleRegion: MKCoordinateRegion?
     @State private var searchText = ""
-    @State private var isManualMarker = false
-    @State private var selectedPlacemark: MTPlacemark?
-    @State var viewModel: MapManagerViewModel
+    @State var viewModel: MapViewModel
     
-    @FocusState private var seacrhFielsFocus: Bool
+    @FocusState private var searchFieldFocus: Bool
     
     init(context: ModelContext) {
-        self.viewModel = MapManagerViewModel(context: context)
+        self.viewModel = MapViewModel(context: context)
     }
     
     var body: some View {
-        MapReader { proxy in
-            Map(position: $cameraPostion) {
-                UserAnnotation()
-                ForEach(viewModel.listPlacemarks) { placemark in
-                    Marker(coordinate: placemark.coordinate) {
-                        Label(placemark.name, systemImage: "star")
-                    }
-                    .tint(.yellow)
+        Map(position: $cameraPosoition) {
+            UserAnnotation()
+            
+            ForEach(viewModel.placemarks) { placemark in
+                Marker(coordinate: placemark.coordinate) {
+                    Label(placemark.name, systemImage: "star")
                 }
-            }
-            .mapControls({
-                MapUserLocationButton()
-            })
-            .onAppear {
-                manger.requestWhenInUseAuthorization()
+                .tint(Color.yellow)
             }
         }
+        .mapControls( {
+            MapUserLocationButton()
+        })
+        .onAppear {
+            manager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    private func listTailorPlacmarks(tailor: GoogleMapsLocalResults.LocalResults) -> some View {
+        TailorMapView(tailor: tailor)
     }
 }
 

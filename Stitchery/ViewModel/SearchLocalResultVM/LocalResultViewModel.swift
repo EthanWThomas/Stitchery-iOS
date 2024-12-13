@@ -8,15 +8,11 @@
 import Foundation
 
 class LocalResultViewModel: ObservableObject {
-    
     @Published private(set) var isLoading = true
     @Published private(set) var errorMessage: String?
     
     @Published var searchText = ""
-//    @Published var latitude = ""
-//    @Published var longitude = ""
     @Published var location = LocationManager()
-    
     @Published var localResult = [GoogleMapsLocalResults.LocalResults]()
     
     private let apiManager = SerpAPIManager()
@@ -62,15 +58,6 @@ class LocalResultViewModel: ObservableObject {
                 
                 let result = try await self?.apiManager.seacrhGoogleMapLocalResultWithLatitudeAndlongitude(search: searchText, location: location).localResults
                 self?.isLoading = false
-                
-//                guard let latitude = self?.latitude
-//                else { return }
-//                
-//                guard let longitude = self?.longitude
-//                else { return }
-//                
-//                let result = try await self?.apiManager.seacrhGoogleMapLocalResultWithLatitudeAndlongitude(search: searchText, latitude: latitude, longitude: longitude).localResults
-//                self?.isLoading = false
                 
                 await MainActor.run { [weak self] in
                     self?.localResult = result!

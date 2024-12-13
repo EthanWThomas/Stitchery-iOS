@@ -27,6 +27,7 @@ enum UserSignError: Error {
 class AuthViewModel {
     var userSession: FirebaseAuth.User?
     var currentUser: User?
+    var tailor: GoogleMapsLocalResults.LocalResults?
     
     let auth = Auth.auth()
     

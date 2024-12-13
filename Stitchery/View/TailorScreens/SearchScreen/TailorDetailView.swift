@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TailorDetailView: View {
     var tailor: GoogleMapsLocalResults.LocalResults
     
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) var dismiss
     
     @State var openStateExpanded = false
@@ -68,11 +70,6 @@ struct TailorDetailView: View {
                     }
                 }
                 
-                Section("Pricing") {
-                    Text(tailor.price ?? "This tailor has no pricing set up")
-                        .font(.subheadline)
-                }
-                
                 Section("Open Hours: \(tailor.openState ?? "This website has no Open Hours.")", isExpanded: $openStateExpanded) {
                     Text("monday: \(tailor.operatingHours?.monday ?? "This website has no hours on monday.")")
                     Text("tuesday: \(tailor.operatingHours?.tuesday ?? "This website has no hours on tuesday.")")
@@ -81,6 +78,16 @@ struct TailorDetailView: View {
                     Text("friday: \(tailor.operatingHours?.friday ?? "This website has no hours on friday.")")
                     Text("saturday: \(tailor.operatingHours?.saturday ?? "This website has no hours on saturday.")")
                     Text("sunday: \(tailor.operatingHours?.sunday ?? "This website has no hours on sunday.")")
+                }
+                
+                NavigationLink {
+                    TailorMapView(tailor: tailor)
+                } label: {
+                    SettingRowView(
+                        imageName: "arrow.right.circle.fill",
+                        title: "Go to Map",
+                        tintColor: .red
+                    )
                 }
             }
             .listStyle(.sidebar)
