@@ -40,7 +40,6 @@ struct RegistrationView: View {
             }
             .background(Color.main)
         }
-//        .alert(isPresented: $showAlert, content: getAlert)
     }
     
     private var logInView: some View {

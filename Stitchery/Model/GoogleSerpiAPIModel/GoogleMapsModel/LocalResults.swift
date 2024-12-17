@@ -34,8 +34,6 @@ struct GoogleMapsLocalResults: Codable {
         let website: String?
         let description: String?
         let thumbnail: String?
-//        let serviceOptions: ServiceOptions
-
         
         enum CodingKeys: String, CodingKey {
             case title

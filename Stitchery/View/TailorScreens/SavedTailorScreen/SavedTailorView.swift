@@ -18,13 +18,6 @@ struct SavedTailorView: View {
                 titleScreen
                 List {
                     ForEach(viewModel.localResultResponseModel, id: \.title) { tailor in
-//                        listView(
-//                            imageURL: tailor.thumbnail,
-//                            title: tailor.title,
-//                            type: tailor.type,
-//                            rating: tailor.rating,
-//                            reviews: tailor.reviews
-//                        )
                         listView(
                             imageURL: tailor.thumbnail,
                             title: tailor.title,

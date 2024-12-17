@@ -24,7 +24,8 @@ struct TabNavigation: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
-                ProfileScreen()
+                ProfileScreen(context: ModelContext(cantainer))
+                    .modelContainer(cantainer)
                     .tag(1)
                 
                 // MARK: does work?? why

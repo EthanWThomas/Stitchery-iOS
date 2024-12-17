@@ -22,18 +22,6 @@ struct User: Identifiable, Codable, Equatable, Hashable {
         return ""
     }
     
-//    func isFromCurrentUser() -> Bool {
-//        guard let currUser = AuthManger.shared.getCurrentUser() else {
-//            return false
-//        }
-//        
-//        if currUser.Uid == id {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
-    
     func fetchPhotoURL() -> URL? {
         guard let photoURLString = photoUrl, let url = URL(string: photoURLString) else {
             return nil

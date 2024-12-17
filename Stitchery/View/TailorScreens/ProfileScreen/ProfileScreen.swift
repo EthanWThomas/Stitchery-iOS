@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProfileScreen: View {
     
     @Environment(AuthViewModel.self) var viewModel
     @Environment(\.dismiss) private var dismiss
     @Environment(\.presentationMode) private var presentationMode
+    @State var swiftDataVM: GoogleMapVM
+    
+    init(context: ModelContext) {
+        self.swiftDataVM = GoogleMapVM(context: context)
+    }
     
 //    @State var showSignIn: Bool
     
@@ -20,145 +26,104 @@ struct ProfileScreen: View {
 //    }
     
     var body: some View {
-        VStack {
-            if let user = viewModel.currentUser {
-                VStack(spacing: 0) {
-                    VStack {
-                        Text(user.initial)
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(Color.white)
-                            .frame(width: 150, height: 150)
-                            .background(Color.gray)
-                            .clipShape(Circle())
+        NavigationStack {
+            VStack {
+                if let user = viewModel.currentUser {
+                    VStack(spacing: 0) {
+                        VStack {
+                            Text(user.initial)
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(Color.white)
+                                .frame(width: 150, height: 150)
+                                .background(Color.gray)
+                                .clipShape(Circle())
+                        }
+                        .offset(x: 0, y: 55)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.main)
+                        .padding(.bottom, 55)
+                        
+                        HStack(alignment: .center) {
+                            Text(user.fullname)
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .padding()
+                            //                        Spacer()
+                            Text(user.email)
+                                .font(.footnote)
+                                .accentColor(.gray)
+                                .padding()
+                        }
+                        List {
+                            Section("Account") {
+                                Button {
+                                    viewModel.signOut()
+                                } label: {
+                                    SettingRowView(
+                                        imageName: "arrow.left.circle.fill",
+                                        title: "Sign Out",
+                                        tintColor: .red)
+                                }
+                                
+                                Button {
+                                    print("Delete account..")
+                                } label: {
+                                    SettingRowView(
+                                        imageName: "xmark.circle.fill",
+                                        title: "Delete account",
+                                        tintColor: .red)
+                                }
+                            }
+                            
+                            Section {
+                                NavigationLink {
+                                    SavedTailorView(viewModel: swiftDataVM)
+                                } label: {
+                                    SettingRowView(
+                                        imageName: "heart",
+                                        title: "Favourite",
+                                        tintColor: .black
+                                    )
+                                }
+                            } header: {
+                                Text("Content")
+                                    .foregroundStyle(Color.black)
+                            }
+                            
+                            Section {
+                                Button {
+                                    // TODO: add a setting view
+                                } label: {
+                                    SettingRowView(
+                                        imageName: "list.bullet.clipboard",
+                                        title: "Setting",
+                                        tintColor: .black
+                                    )
+                                }
+                            } header: {
+                                Text("Prefernces")
+                                    .foregroundStyle(Color.black)
+                            }
+                        }
                     }
-                    .offset(x: 0, y: 55)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.main)
-                    .padding(.bottom, 55)
-                    
-                    HStack(alignment: .center) {
-                        Text(user.fullname)
+                } else if let googleUser = viewModel.getGoogleUser() {
+                    VStack(spacing: 0) {
+                        VStack {
+                            displayPhoto(photo: googleUser.photoUrl)
+                                .offset(x: 0, y: 55)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .background(Color.main)
+                        .padding(.bottom, 55)
+                        Text(googleUser.fullname)
                             .font(.subheadline)
                             .fontWeight(.semibold)
                             .padding()
-//                        Spacer()
-                        Text(user.email)
-                            .font(.footnote)
-                            .accentColor(.gray)
-                            .padding()
+                        sectionListitem
                     }
-                    List {
-                        Section("Account") {
-                            Button {
-                                viewModel.signOut()
-                            } label: {
-                                SettingRowView(
-                                    imageName: "arrow.left.circle.fill",
-                                    title: "Sign Out",
-                                    tintColor: .red)
-                            }
-                            
-                            Button {
-                                print("Delete account..")
-                            } label: {
-                                SettingRowView(
-                                    imageName: "xmark.circle.fill",
-                                    title: "Delete account",
-                                    tintColor: .red)
-                            }
-                        }
-                        
-                        Section {
-                            Button {
-                                // TODO: add favourite action
-                            } label: {
-                                SettingRowView(
-                                    imageName: "heart",
-                                    title: "Favourite",
-                                    tintColor: .black
-                                )
-                            }
-                        } header: {
-                            Text("Content")
-                                .foregroundStyle(Color.black)
-                        }
-                        
-                        Section {
-                            Button {
-                                // TODO: add a setting view
-                            } label: {
-                                SettingRowView(
-                                    imageName: "list.bullet.clipboard",
-                                    title: "Setting",
-                                    tintColor: .black
-                                )
-                            }
-                        } header: {
-                            Text("Prefernces")
-                                .foregroundStyle(Color.black)
-                        }
-                    }
+                    .background(Color.proflielistcolor)
                 }
-//                List {
-//                    Section {
-//                        HStack {
-//                            Text(user.initial)
-//                                .font(.title)
-//                                .fontWeight(.semibold)
-//                                .foregroundStyle(Color.white)
-//                                .frame(width: 72, height: 72)
-//                                .background(Color.gray)
-//                                .clipShape(Circle())
-//                            
-//                            VStack(alignment: .leading, spacing: 4) {
-//                                Text(user.fullname)
-//                                    .font(.subheadline)
-//                                    .fontWeight(.semibold)
-//                                    .padding()
-//                                
-//                                Text(user.email)
-//                                    .font(.footnote)
-//                                    .accentColor(.gray)
-//                            }
-//                        }
-//                    }
-//                    Section("Account") {
-//                        Button {
-//                            viewModel.signOut()
-//                        } label: {
-//                            SettingRowView(
-//                                imageName: "arrow.left.circle.fill",
-//                                title: "Sign Out",
-//                                tintColor: .red)
-//                        }
-//                        
-//                        Button {
-//                            print("Delete account..")
-//                        } label: {
-//                            SettingRowView(
-//                                imageName: "xmark.circle.fill",
-//                                title: "Delete account",
-//                                tintColor: .red)
-//                        }
-//                    }
-//                }
-            } else if let googleUser = viewModel.getGoogleUser() {
-                VStack(spacing: 0) {
-                    VStack {
-                        displayPhoto(photo: googleUser.photoUrl)
-                            .offset(x: 0, y: 55)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .background(Color.main)
-                    .padding(.bottom, 55)
-                    Text(googleUser.fullname)
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .padding()
-                    sectionListitem
-                }
-                .background(Color.proflielistcolor)
             }
         }
     }

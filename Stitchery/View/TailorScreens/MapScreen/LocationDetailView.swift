@@ -11,81 +11,66 @@ import MapKit
 
 struct LocationDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    
-    var destination: Destination?
-    var selectedPlacemark: MTPlacemark?
+    @Binding var mapSelection: MKMapItem?
+    @Binding var show: Bool
     
     @State private var lookaroundScene: MKLookAroundScene?
-    @State var viewModel: MapViewModel
+    
+    var tailor: GoogleMapsLocalResults.LocalResults
     
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(selectedPlacemark?.name ?? "")
-                        .font(.title2)
+                    Text(tailor.title)
+                        .font(.title)
                         .fontWeight(.semibold)
                     
-                    Text(selectedPlacemark?.address ?? "")
-                        .font(.footnote)
-                        .foregroundStyle(.gray)
-                        .lineLimit(2)
+                    Text(tailor.address)
+                        .font(.subheadline)
+                        .foregroundStyle(Color.gray)
                         .padding(.trailing)
                 }
                 Spacer()
+                
                 Button {
-                    dismiss()
+                    show.toggle()
+                    mapSelection = nil
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .imageScale(.large)
-                        .foregroundStyle(.gray)
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundStyle(.gray, Color(.systemGray))
                 }
             }
-            if let lookaroundScene {
-                LookAroundPreview(initialScene: lookaroundScene)
+            
+            if let scene = lookaroundScene {
+                LookAroundPreview(initialScene: scene)
                     .frame(height: 200)
+                    .cornerRadius(12)
                     .padding()
             } else {
                 ContentUnavailableView("No preview available", systemImage: "eye.slash")
             }
-            HStack {
-                Spacer()
-                if let destination {
-                    let inList = (selectedPlacemark != nil && selectedPlacemark?.destination != nil)
-                    Button {
-                        if let selectedPlacemark {
-                            if selectedPlacemark.destination == nil {
-                                destination.placemarks.append(selectedPlacemark)
-                            } else {
-                                selectedPlacemark.destination = nil
-                            }
-                            dismiss()
-                        }
-                    } label: {
-                        Label(inList ? "Remove" : "Add", systemImage: inList ? "minus.circle" : "plus.circle")
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(inList ? .red : .green)
-                }
-            }
-            Spacer()
         }
-        .padding()
-        .task(id: selectedPlacemark) {
-            await fetchLookaroundPreview()
+        .task(id: mapSelection) {
+            fetchLookaroundPreview()
         }
-//        .onAppear {
-//            if let selectedPlacemark, destination != nil {
-//                
-//            }
-//        }
+        .onAppear {
+            fetchLookaroundPreview()
+        }
+        .onChange(of: mapSelection) { oldValue, newValue in
+            fetchLookaroundPreview()
+        }
     }
     
-    func fetchLookaroundPreview() async {
-        if let selectedPlacemark {
+    private func fetchLookaroundPreview() {
+        if let mapSelection {
             lookaroundScene = nil
-            let lookaroundRequest = MKLookAroundSceneRequest(coordinate: selectedPlacemark.coordinate)
-            lookaroundScene = try? await lookaroundRequest.scene
+            Task {
+                let request = MKLookAroundSceneRequest(mapItem: mapSelection)
+                lookaroundScene = try? await request.scene
+            }
         }
     }
 }
