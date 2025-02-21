@@ -32,8 +32,8 @@ extension SerpAPIManager {
         let formattedLongitude = String(format: "%.6f", location.longitude)
         
         // MARK: Fix this url 
-//        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=Tailor&ll=@\(formattedLatitude),\(formattedLongitude),12z&google_domain=google.com&gI=us&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
-        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=Tailor&ll=%40\(formattedLatitude)%2C\(formattedLongitude)%2C14z&google_domain=google.com&gI=us&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
+        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=Tailor&ll=@\(formattedLatitude),\(formattedLongitude),12z&google_domain=google.com&gI=us&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
+//        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=Tailor&ll=%40\(formattedLatitude)%2C\(formattedLongitude)%2C14z&google_domain=google.com&gI=us&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
         else { throw ResquestError.failedToCreateURL }
         
         var request = URLRequest(url: url)

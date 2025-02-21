@@ -13,6 +13,7 @@ struct LocationDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var mapSelection: MKMapItem?
     @Binding var show: Bool
+    @Binding var showRoute: Bool
     
     @State private var lookaroundScene: MKLookAroundScene?
     
@@ -51,6 +52,37 @@ struct LocationDetailView: View {
                     .padding()
             } else {
                 ContentUnavailableView("No preview available", systemImage: "eye.slash")
+            }
+            HStack(spacing: 24) {
+                Button {
+                    if let mapSelection {
+                        let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(
+                            latitude: tailor.gpsCoordinates.latitude ?? 0.0,
+                            longitude: tailor.gpsCoordinates.longitude ?? 0.0))
+                        let mapItem = MKMapItem(placemark: placemark)
+                        mapItem.openInMaps()
+                        
+                    }
+                } label: {
+                    Text("Open in Maps")
+                        .font(.headline)
+                        .foregroundStyle(Color.white)
+                        .frame(width: 170, height: 48)
+                        .background(.green)
+                        .cornerRadius(12)
+                }
+                
+                Button {
+                    showRoute.toggle()
+//                    showRoute = true
+                } label: {
+                    Text("Get Direction")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .frame(width: 170, height: 40)
+                        .background(.blue)
+                        .cornerRadius(12)
+                }
             }
         }
         .task(id: mapSelection) {

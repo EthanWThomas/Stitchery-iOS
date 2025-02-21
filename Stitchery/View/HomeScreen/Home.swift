@@ -25,17 +25,17 @@ struct Home: View {
                 
                 Spacer()
                 
-                NavigationLink {
-                    // TODO: Add A Tailor Sign Up View
-                } label: {
-                    Text("Tailor Sign Up")
-                        .font(.title)
-                        .foregroundStyle(Color.black)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.buttons)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                }
+//                NavigationLink {
+//                    // TODO: Add A Tailor Sign Up View
+//                } label: {
+//                    Text("Tailor Sign Up")
+//                        .font(.title)
+//                        .foregroundStyle(Color.black)
+//                        .frame(maxWidth: .infinity)
+//                        .padding()
+//                        .background(Color.buttons)
+//                        .clipShape(RoundedRectangle(cornerRadius: 15))
+//                }
                 NavigationLink {
                     SignInView()
                         .navigationBarBackButtonHidden(true)

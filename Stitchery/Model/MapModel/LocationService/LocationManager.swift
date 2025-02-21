@@ -12,6 +12,7 @@ import CoreLocationUI
 class LocationManager: NSObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
     
+    var userLocation: CLLocation?
     var location: CLLocationCoordinate2D?
     
     override init() {

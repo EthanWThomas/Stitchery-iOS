@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import SwiftData
+import FirebaseAuth
+import GoogleSignIn
+import Firebase
 
 struct SignInView: View {
     @State private var email = ""
@@ -73,14 +77,17 @@ struct SignInView: View {
             .padding(.top, 24)
             
             Button {
-                viewModel.signInWithGoogle { result in
-                    switch result {
-                        case .success(_):
-                            break
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                    }
+                viewModel.signInWithGoogle(presenting: getRootViewController()) { error in
+                    
                 }
+//                viewModel.signInWithGoogle { result in
+//                    switch result {
+//                        case .success(_):
+//                            break
+//                        case .failure(let error):
+//                            print(error.localizedDescription)
+//                    }
+//                }
             } label: {
                 HStack {
                     Text("SigIn with Google")

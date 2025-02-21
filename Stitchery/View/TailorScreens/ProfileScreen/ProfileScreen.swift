@@ -66,14 +66,14 @@ struct ProfileScreen: View {
                                         tintColor: .red)
                                 }
                                 
-                                Button {
-                                    print("Delete account..")
-                                } label: {
-                                    SettingRowView(
-                                        imageName: "xmark.circle.fill",
-                                        title: "Delete account",
-                                        tintColor: .red)
-                                }
+//                                Button {
+//                                    print("Delete account..")
+//                                } label: {
+//                                    SettingRowView(
+//                                        imageName: "xmark.circle.fill",
+//                                        title: "Delete account",
+//                                        tintColor: .red)
+//                                }
                             }
                             
                             Section {
@@ -91,20 +91,20 @@ struct ProfileScreen: View {
                                     .foregroundStyle(Color.black)
                             }
                             
-                            Section {
-                                Button {
-                                    // TODO: add a setting view
-                                } label: {
-                                    SettingRowView(
-                                        imageName: "list.bullet.clipboard",
-                                        title: "Setting",
-                                        tintColor: .black
-                                    )
-                                }
-                            } header: {
-                                Text("Prefernces")
-                                    .foregroundStyle(Color.black)
-                            }
+//                            Section {
+//                                Button {
+//                                    // TODO: add a setting view
+//                                } label: {
+//                                    SettingRowView(
+//                                        imageName: "list.bullet.clipboard",
+//                                        title: "Setting",
+//                                        tintColor: .black
+//                                    )
+//                                }
+//                            } header: {
+//                                Text("Prefernces")
+//                                    .foregroundStyle(Color.black)
+//                            }
                         }
                     }
                 } else if let googleUser = viewModel.getGoogleUser() {
