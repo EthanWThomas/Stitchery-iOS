@@ -43,9 +43,6 @@ struct RootView: View {
         Group {
             if viewModel.userSession != nil {
                 TabNavigation()
-//                if !isSignIn {
-//
-//                }
             } else {
                 SignInView()
             }

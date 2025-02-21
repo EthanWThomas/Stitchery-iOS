@@ -12,7 +12,7 @@ struct TailorMapView: View {
     @Environment(\.locationManager) var manager
 //    @Environment(LocationManager.self) var locationManager
     
-    @State var userLocation: CLLocation?
+//    @State var userLocation: CLLocation?
     @State private var showDetails = false
     @State private var mapSelection: MKMapItem?
     @State private var results = [MKMapItem]()
@@ -22,7 +22,7 @@ struct TailorMapView: View {
        ))
     
     @State private var showRoute = false
-    @State private var routeDisplaying = false
+//    @State private var routeDisplaying = false
     @State private var route: MKRoute?
     @State private var routeDestination: MKMapItem?
     @State private var travelInterval: TimeInterval?
@@ -32,7 +32,7 @@ struct TailorMapView: View {
     var tailor: GoogleMapsLocalResults.LocalResults
     
     var body: some View {
-        Map(position: $tailorCameraPosition, selection: $mapSelection) {
+        Map(position: $tailorCameraPosition) {
             
             UserAnnotation()
             Annotation(tailor.title, coordinate: CLLocationCoordinate2D(
@@ -41,8 +41,17 @@ struct TailorMapView: View {
                     Label(tailor.title, systemImage: "person.fill")
                         .labelStyle(.iconOnly)
                         .onTapGesture {
+                            
+//                            mapSelection = MKMapItem.
+                            let placeMark = MKPlacemark(coordinate: CLLocationCoordinate2D(
+                                latitude: tailor.gpsCoordinates.latitude ?? 0.0,
+                                longitude: tailor.gpsCoordinates.longitude ?? 0.0))
+                            mapSelection = MKMapItem(placemark: placeMark)
+                            
+                            
                             showDetails = true
 //                            showRoute = true
+                            
                         }
                         .background {
                             Circle()
@@ -50,7 +59,7 @@ struct TailorMapView: View {
                                 .frame(width: 25, height: 25, alignment: .center)
                         }
                 }
-            if let route, routeDisplaying {
+            if let route {
                 MapPolyline(route.polyline)
                     .stroke(.blue, lineWidth: 6)
             }
@@ -60,9 +69,9 @@ struct TailorMapView: View {
 //                fetchRoute()
 //            }
 //        })
-        .onChange(of: mapSelection, { oldValue, newValue in
-            showDetails = newValue != nil
-        })
+//        .onChange(of: mapSelection, { oldValue, newValue in
+//            showDetails = newValue != nil
+//        })
         .sheet(isPresented: $showDetails, content: {
             LocationDetailView(
                 mapSelection: $mapSelection,
@@ -78,20 +87,24 @@ struct TailorMapView: View {
             MapPitchToggle()
             MapCompass()
         }
-        .task(id: mapSelection) {
+//        .task(id: mapSelection) {
+//            if mapSelection != nil {
+//                route = nil
+//                await fetchRoute()
+//            }
+//        }
+        .task(id: showRoute) {
             if mapSelection != nil {
-                routeDisplaying = false
-                showRoute = false
                 route = nil
                 await fetchRoute()
             }
         }
 
         .onChange(of: showRoute) {
-            mapSelection = nil
+//            mapSelection = nil
             if showRoute {
                 withAnimation {
-                    routeDisplaying = true
+//                    routeDisplaying = true
                     if let rect = route?.polyline.boundingMapRect {
                         tailorCameraPosition = .rect(rect)
                     }
@@ -114,34 +127,8 @@ struct TailorMapView: View {
           ))
       }
     
-//    private func fetchRoute() {
-//        if let mapSelection {
-//            let request = MKDirections.Request()
-//            request.source = MKMapItem(placemark: MKPlacemark(
-//                coordinate: CLLocationCoordinate2D(
-//                    latitude: tailor.gpsCoordinates.latitude ?? 0.0,
-//                    longitude: tailor.gpsCoordinates.longitude ?? 0.0)))
-//            request.destination = mapSelection
-//            
-//            Task {
-//                let result = try? await MKDirections(request: request).calculate()
-//                route = result?.routes.first
-//                routeDestination = mapSelection
-//                
-//                withAnimation(.snappy) {
-//                    routeDisplaying = true
-//                    showDetails = false
-//                    
-//                    if let rect = route?.polyline.boundingMapRect, routeDisplaying {
-//                        tailorCameraPosition = .rect(rect)
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
     func fetchRoute() async {
-        if let userLocation = userLocation, let mapSelection {
+        if let userLocation = manager.location, let mapSelection {
             let request = MKDirections.Request()
             let sourcePlacemark = MKPlacemark(coordinate: userLocation.coordinate)
             let routeSource = MKMapItem(placemark: sourcePlacemark)
@@ -159,10 +146,10 @@ struct TailorMapView: View {
     }
     
     func removeRoute() {
-        routeDisplaying = false
+//        routeDisplaying = false
         showRoute = false
         route = nil
-        mapSelection = nil
+//        mapSelection = nil
         updateCameraPosition()
     }
     

@@ -113,14 +113,9 @@ struct RegistrationView: View {
             .padding(.top, 24)
             
             Button {
-//                viewModel.signInWithGoogle { result in
-//                    switch result {
-//                        case .success(_):
-//                            break
-//                        case .failure(let error):
-//                            print(error.localizedDescription)
-//                    }
-//                }
+                viewModel.signInWithGoogle(presenting: getRootViewController()) { error in
+                    
+                }
             } label: {
                 HStack {
                     Text("SigIn with Google")

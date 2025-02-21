@@ -36,7 +36,7 @@ struct LocationDetailView: View {
                 
                 Button {
                     show.toggle()
-                    mapSelection = nil
+//                    mapSelection = nil
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
@@ -85,9 +85,9 @@ struct LocationDetailView: View {
                 }
             }
         }
-        .task(id: mapSelection) {
-            fetchLookaroundPreview()
-        }
+//        .task(id: mapSelection) {
+//            fetchLookaroundPreview()
+//        }
         .onAppear {
             fetchLookaroundPreview()
         }

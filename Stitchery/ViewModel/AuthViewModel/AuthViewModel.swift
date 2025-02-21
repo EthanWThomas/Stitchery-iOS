@@ -62,10 +62,12 @@ class AuthViewModel {
         GIDSignIn.sharedInstance.signIn(withPresenting: topVC) { [unowned self] result, error in
             guard let user = result?.user,
                   let idToken = user.idToken?.tokenString
+                    
             else {
                 completion(.failure(.signInPressentationError))
                 return
             }
+            
             
             let credential = GoogleAuthProvider.credential(
                 withIDToken: idToken,
@@ -74,6 +76,7 @@ class AuthViewModel {
             auth.signIn(with: credential) { result, error in
                 guard let result = result, error == nil else {
                     completion(.failure(.authSignInError))
+                    
                     return
                 }
                 
@@ -83,8 +86,10 @@ class AuthViewModel {
                     email: result.user.email ?? "Unknown",
                     photoUrl: result.user.photoURL?.absoluteString)
                 completion(.success(user))
+                self.userSession = result.user
                 UserDefaults.standard.set(true, forKey: "signIn") // When this change to true, it will go to the home screen
             }
+            
         }
     }
     
