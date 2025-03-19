@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct ProfileScreen: View {
     
@@ -18,12 +19,6 @@ struct ProfileScreen: View {
     init(context: ModelContext) {
         self.swiftDataVM = GoogleMapVM(context: context)
     }
-    
-//    @State var showSignIn: Bool
-    
-//    init(showSignIn: Bool = true) {
-//        self.showSignIn = AuthManger.shared.getCurrentUser() == nil
-//    }
     
     var body: some View {
         NavigationStack {

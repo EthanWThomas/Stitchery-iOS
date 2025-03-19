@@ -41,8 +41,6 @@ struct TailorMapView: View {
                     Label(tailor.title, systemImage: "person.fill")
                         .labelStyle(.iconOnly)
                         .onTapGesture {
-                            
-//                            mapSelection = MKMapItem.
                             let placeMark = MKPlacemark(coordinate: CLLocationCoordinate2D(
                                 latitude: tailor.gpsCoordinates.latitude ?? 0.0,
                                 longitude: tailor.gpsCoordinates.longitude ?? 0.0))
@@ -50,8 +48,6 @@ struct TailorMapView: View {
                             
                             
                             showDetails = true
-//                            showRoute = true
-                            
                         }
                         .background {
                             Circle()

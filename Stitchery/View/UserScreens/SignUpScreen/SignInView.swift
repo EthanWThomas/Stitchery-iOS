@@ -78,16 +78,8 @@ struct SignInView: View {
             
             Button {
                 viewModel.signInWithGoogle(presenting: getRootViewController()) { error in
-                    
+                    // MARK: this works some how?
                 }
-//                viewModel.signInWithGoogle { result in
-//                    switch result {
-//                        case .success(_):
-//                            break
-//                        case .failure(let error):
-//                            print(error.localizedDescription)
-//                    }
-//                }
             } label: {
                 HStack {
                     Text("SigIn with Google")
