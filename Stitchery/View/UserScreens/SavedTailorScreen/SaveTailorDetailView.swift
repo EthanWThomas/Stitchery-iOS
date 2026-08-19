@@ -10,122 +10,183 @@ import SwiftData
 
 struct SaveTailorDetailView: View {
     var tailor: LocalResultsDataModel
-    
+
     @Environment(\.dismiss) var dismiss
-    
-    @State var openStateExpanded = false
-    
+
+    @State private var openStateExpanded = false
+
     var body: some View {
-        title
-        aboutView
-        Spacer()
-    }
-    
-    private var title: some View {
-        VStack {
-            displayImageUrl(url: tailor.thumbnail)
-                .frame(width: 250, height: 250)
-        }
-    }
-    
-    private var aboutView: some View {
-        VStack(alignment: .center, spacing: 15) {
-            Text(tailor.title)
-                .font(.headline)
-                .fontWeight(.semibold)
-                .foregroundStyle(Color.black)
-            List {
-                Section("Links") {
-                    Text("Address: \(tailor.address)")
-                        .font(.subheadline)
-                    Text("Phone Number: \(tailor.phone ?? "No Phone Number")")
-                        .font(.subheadline)
-                    
-                    if let website = tailor.website, !website.isEmpty {
-                        Link(destination: URL(string: tailor.website ?? "UnKnown")!) {
-                            Text(tailor.website ?? "This Tailor has no website")
-                                .underline()
-                                .foregroundStyle(Color.blue)
-                                .font(.subheadline)
-                        }
-                    } else {
-                        Text("This Tailor has no website")
-                            .font(.subheadline)
-                            .foregroundStyle(Color.red)
-                    }
-                }
-                
-                Section("More info about \(tailor.title)") {
-                    Text(tailor.itemDescription ?? "This website has no description")
-                        .font(.subheadline)
-                        .multilineTextAlignment(.leading)
-                }
-                
-                Section("Type") {
-                    if let types = tailor.types {
-                        ForEach(types, id: \.count) { type in
-                            Text(type.description)
-                        }
-                    }
-                }
-                
-                Section("Pricing") {
-                    Text(tailor.price ?? "This tailor has no pricing set up")
-                        .font(.subheadline)
-                }
-                
-                Section("Open Hours: \(tailor.openState ?? "This website has no Open Hours.")", isExpanded: $openStateExpanded) {
-                    Text("monday: \(tailor.operatingHours?.monday ?? "No operating hours information available.")")
-                    Text("tuesday: \(tailor.operatingHours?.tuesday ?? "No operating hours information available.")")
-                    Text("wednesday: \(tailor.operatingHours?.wednesday ?? "No operating hours information available.")")
-                    Text("thursday: \(tailor.operatingHours?.thursday ?? "No operating hours information available.")")
-                    Text("friday: \(tailor.operatingHours?.friday ?? "No operating hours information available.")")
-                    Text("saturday: \(tailor.operatingHours?.saturday ?? "No operating hours information available.")")
-                    Text("sunday: \(tailor.operatingHours?.sunday ?? "No operating hours information available.")")
-                }
+        ScrollView {
+            VStack(spacing: 16) {
+                TailorHeroHeader(
+                    thumbnail: tailor.thumbnail,
+                    title: tailor.title,
+                    type: tailor.type,
+                    openState: tailor.openState
+                )
+
+                statsRow
+
+                contactCard
+
+                aboutCard
+
+                servicesCard
+
+                TailorHoursCard(
+                    operatingHours: tailor.operatingHours,
+                    openState: tailor.openState,
+                    isExpanded: $openStateExpanded
+                )
+
+                messageButton
             }
-            .listStyle(.sidebar)
+            .padding(.horizontal)
+            .padding(.bottom, 32)
+            .frame(maxWidth: 640)
+            .frame(maxWidth: .infinity)
         }
+        .background(Color(.systemGroupedBackground))
+        .navigationTitle(tailor.title)
+        .navigationBarTitleDisplayMode(.inline)
     }
-    
-    private var backButton: some View {
-        Button {
-            dismiss()
+
+    private var messageButton: some View {
+        NavigationLink {
+            ChatThreadView(partner: ChatPartner(dataModel: tailor))
         } label: {
-            HStack {
-                Image(systemName: "arrowshape.left")
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(Color.red)
-                VStack {
-                    Text("Back")
-                        .foregroundStyle(Color.red)
+            HStack(spacing: 10) {
+                Image(systemName: "bubble.left.and.bubble.right.fill")
+                Text("Message Tailor")
+                    .fontWeight(.semibold)
+                Spacer()
+                Image(systemName: "arrow.right")
+            }
+            .font(.headline)
+            .foregroundStyle(.white)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color.blue)
+            )
+            .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
+        }
+    }
+
+    private var statsRow: some View {
+        HStack(spacing: 12) {
+            TailorStat(
+                icon: "star.fill",
+                value: String(format: "%.1f", tailor.rating ?? 0.0),
+                label: "Rating"
+            )
+            TailorStat(
+                icon: "text.bubble.fill",
+                value: "\(tailor.reviews ?? 0)",
+                label: "Reviews"
+            )
+            if let price = tailor.price, !price.isEmpty {
+                TailorStat(
+                    icon: "dollarsign.circle.fill",
+                    value: price,
+                    label: "Price"
+                )
+            }
+        }
+    }
+
+    private var contactCard: some View {
+        TailorCard(title: "Contact", systemImage: "phone.circle.fill") {
+            VStack(spacing: 14) {
+                TailorInfoRow(
+                    icon: "mappin.circle.fill",
+                    title: "Address",
+                    value: tailor.address
+                )
+
+                Divider()
+
+                if let phone = tailor.phone, !phone.isEmpty {
+                    Button {
+                        openTel(phone)
+                    } label: {
+                        TailorInfoRow(
+                            icon: "phone.fill",
+                            title: "Phone",
+                            value: phone,
+                            valueColor: .blue,
+                            showChevron: true
+                        )
+                    }
+                    .buttonStyle(.plain)
+                } else {
+                    TailorInfoRow(
+                        icon: "phone.fill",
+                        title: "Phone",
+                        value: "No phone number",
+                        valueColor: .secondary
+                    )
+                }
+
+                Divider()
+
+                websiteRow
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var websiteRow: some View {
+        if let website = tailor.website, !website.isEmpty, let url = URL(string: website) {
+            Link(destination: url) {
+                TailorInfoRow(
+                    icon: "globe",
+                    title: "Website",
+                    value: website,
+                    valueColor: .blue,
+                    showChevron: true
+                )
+            }
+            .buttonStyle(.plain)
+        } else {
+            TailorInfoRow(
+                icon: "globe",
+                title: "Website",
+                value: "No website available",
+                valueColor: .secondary
+            )
+        }
+    }
+
+    private var aboutCard: some View {
+        TailorCard(title: "About", systemImage: "info.circle.fill") {
+            Text(tailor.itemDescription ?? "This tailor has no description.")
+                .font(.subheadline)
+                .foregroundStyle(tailor.itemDescription == nil ? .secondary : .primary)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    @ViewBuilder
+    private var servicesCard: some View {
+        if let types = tailor.types, !types.isEmpty {
+            TailorCard(title: "Services", systemImage: "scissors") {
+                FlowLayout(spacing: 8) {
+                    ForEach(types, id: \.self) { type in
+                        TagChip(text: type)
+                    }
                 }
             }
         }
-        .frame(width: 105, height: 35)
-        .background(
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.gray)
-        )
-        .padding()
     }
-    
-    private func displayImageUrl(url: String?) -> some View {
-        AsyncImage(url: URL(string: url ?? "Unknown")) { phase in
-            switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                        .resizable()
-                default:
-                    Image(systemName: "building")
-                        .tint(Color.main)
-            }
-        }
+
+    private func openTel(_ phone: String) {
+        let digits = phone.filter { $0.isNumber || $0 == "+" }
+        guard !digits.isEmpty, let url = URL(string: "tel://\(digits)") else { return }
+        UIApplication.shared.open(url)
     }
-    
-    
 }
 
 //#Preview {

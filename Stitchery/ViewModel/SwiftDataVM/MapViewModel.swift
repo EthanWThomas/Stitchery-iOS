@@ -22,9 +22,6 @@ class MapViewModel {
     
     init(context: ModelContext) {
         self.context = context
-        
-        fetchMTPlacemark()
-        fetchDestination()
     }
 }
 

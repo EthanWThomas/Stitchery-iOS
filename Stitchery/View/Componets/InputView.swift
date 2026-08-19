@@ -15,37 +15,31 @@ struct InputView: View {
     
     var isSecureField = false
     
+    @FocusState private var isFocused: Bool
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .foregroundStyle(Color.gray)
+                .foregroundStyle(isFocused ? Color.accentColor : Color.gray)
                 .fontWeight(.semibold)
                 .font(.footnote)
+                .animation(.easeInOut(duration: 0.2), value: isFocused)
             
-            if isSecureField {
-                SecureField(placeholder, text: $text)
-                    .font(.system(size: 14))
-//                    .padding()
-//                    .frame(height: 50)
-//                    .background(
-//                        RoundedRectangle(cornerRadius: 12)
-//                            .fill(Color.buttons)
-//                            .stroke(Color.gray)
-//                            .shadow(color: .primary.opacity(0.15), radius: 10, x: 0, y: 0)
-//                    )
-            } else {
-                TextField(placeholder, text: $text)
-                    .font(.system(size: 14))
-//                    .frame(height: 50)
-//                    .background(
-//                        RoundedRectangle(cornerRadius: 12)
-//                            .fill(Color.buttons)
-//                            .stroke(Color.gray)
-//                            .shadow(color: .primary.opacity(0.15), radius: 10, x: 0, y: 0)
-//                    )
-                
+            Group {
+                if isSecureField {
+                    SecureField(placeholder, text: $text)
+                } else {
+                    TextField(placeholder, text: $text)
+                }
             }
-            Divider()
+            .font(.system(size: 14))
+            .focused($isFocused)
+            .tint(Color.accentColor)
+            
+            Rectangle()
+                .fill(isFocused ? Color.accentColor : Color.gray.opacity(0.4))
+                .frame(height: isFocused ? 1.5 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isFocused)
         }
     }
 }

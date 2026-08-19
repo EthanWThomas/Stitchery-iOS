@@ -46,13 +46,21 @@ struct SignInView: View {
                     text: $email,
                     title: "Email",
                     placeholder: "Enter Email")
-                .autocapitalization(.none)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
+                .submitLabel(.next)
                 
                 InputView(
                     text: $password,
                     title: "Password",
                     placeholder: "Enter Password",
                     isSecureField: true)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .textContentType(.password)
+                .submitLabel(.go)
             }
             .padding(.horizontal)
             .padding(.top, 12)
@@ -111,6 +119,7 @@ struct SignInView: View {
                 RoundedRectangle(cornerRadius: 35)
                     .frame(width: 420, height: 800)
                     .foregroundStyle(Color.white)
+                    .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: -2)
             }
         }
     }

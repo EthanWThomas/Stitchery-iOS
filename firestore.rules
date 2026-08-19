@@ -1,0 +1,53 @@
+rules_version = '2';
+
+// Security rules for Stitchery tailor messaging.
+//
+// Data model:
+//   users/{uid}                                  – app user profile
+//   users/{uid}/conversations/{conversationId}   – per-user inbox summary
+//   conversations/{conversationId}/messages/{id} – the message thread
+//   tailors/{tailorId}                           – lightweight tailor profile
+//
+// conversationId is deterministic: "{uid}_{partnerId}". A user may only touch
+// threads whose id begins with their own uid, which keeps the one-sided MVP
+// locked down while remaining easy to extend to a real tailor side later.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // A conversation belongs to the signed-in user when its id is "{uid}_...".
+    function ownsConversation(conversationId) {
+      return isSignedIn()
+             && conversationId.matches('^' + request.auth.uid + '_.*');
+    }
+
+    // App users + their private inbox.
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && request.auth.uid == userId;
+
+      match /conversations/{conversationId} {
+        allow read, write: if isSignedIn() && request.auth.uid == userId;
+      }
+    }
+
+    // Message threads.
+    match /conversations/{conversationId}/messages/{messageId} {
+      allow read: if ownsConversation(conversationId);
+      allow create: if ownsConversation(conversationId)
+                    && request.resource.data.fromId == request.auth.uid;
+      // Messages are immutable once sent.
+      allow update, delete: if false;
+    }
+
+    // Tailor profiles are readable by any signed-in user and written when a
+    // user first messages a tailor.
+    match /tailors/{tailorId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+  }
+}

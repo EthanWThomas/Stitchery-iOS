@@ -19,8 +19,6 @@ class GoogleMapVM {
     
     init(context: ModelContext) {
         self.context = context
-        
-        fetchLocalResult()
     }
     
     func fetchLocalResult() {

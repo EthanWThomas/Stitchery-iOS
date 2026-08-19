@@ -53,18 +53,30 @@ struct RegistrationView: View {
                     text: $fullname,
                     title: "User Name",
                     placeholder: "Enter Name")
+                .textInputAutocapitalization(.words)
+                .autocorrectionDisabled()
+                .textContentType(.name)
+                .submitLabel(.next)
                 
                 InputView(
                     text: $email,
                     title: "Email",
                     placeholder: "Enter Email")
-                .autocapitalization(.none)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
+                .submitLabel(.next)
                 
                 InputView(
                     text: $password,
                     title: "Password",
                     placeholder: "Enter Password",
                     isSecureField: true)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .textContentType(.newPassword)
+                .submitLabel(.next)
                 
                 ZStack(alignment: .trailing) {
                     InputView(
@@ -72,6 +84,10 @@ struct RegistrationView: View {
                         title: "Confirm Password",
                         placeholder: "Enter Confirm Password",
                         isSecureField: true)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .textContentType(.newPassword)
+                    .submitLabel(.go)
                     if !password.isEmpty && !confirmPassword.isEmpty {
                         if password == confirmPassword {
                             Image(systemName: "checkmark.circle.fill")
@@ -148,6 +164,7 @@ struct RegistrationView: View {
                 RoundedRectangle(cornerRadius: 35)
                     .frame(width: 420, height: 865)
                     .foregroundStyle(Color.white)
+                    .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: -2)
             }
         }
     }

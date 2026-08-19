@@ -24,19 +24,18 @@ struct TabNavigation: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
-                ProfileScreen(context: ModelContext(cantainer))
+                ProfileScreen(context: cantainer.mainContext)
                     .modelContainer(cantainer)
                     .tag(1)
                 
-                // MARK: does work?? why
-                SearchTailorView(context: ModelContext(cantainer))
+                SearchTailorView(context: cantainer.mainContext)
                     .modelContainer(cantainer)
                     .tag(2)
                 
                 MessageRoom()
                     .tag(3)
                 
-                MapView(context: ModelContext(cantainer))
+                MapView(context: cantainer.mainContext)
                     .modelContainer(cantainer)
                     .tag(4)
             }

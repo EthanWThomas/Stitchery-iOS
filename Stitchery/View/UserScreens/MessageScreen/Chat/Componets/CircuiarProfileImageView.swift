@@ -28,22 +28,52 @@ enum ProfileImageSize {
 }
 
 struct CircuiarProfileImageView: View {
-    let user: User?
+    let photoUrl: String?
     let size: ProfileImageSize
-    
+
+    init(photoUrl: String?, size: ProfileImageSize) {
+        self.photoUrl = photoUrl
+        self.size = size
+    }
+
+    init(user: User?, size: ProfileImageSize) {
+        self.photoUrl = user?.photoUrl
+        self.size = size
+    }
+
+    init(partner: ChatPartner, size: ProfileImageSize) {
+        self.photoUrl = partner.photoUrl
+        self.size = size
+    }
+
     var body: some View {
-        if let imageUrl = user?.photoUrl {
-            Image(imageUrl)
-                .resizable()
-                .scaledToFill()
-                .frame(width: size.dimension, height: size.dimension)
-                .clipShape(Circle())
-        } else {
-            Image(systemName: "person.circle.fill")
-                .resizable()
-                .frame(width: size.dimension, height: size.dimension)
-                .foregroundStyle(Color(.systemGray4))
+        Group {
+            if let photoUrl, let url = URL(string: photoUrl) {
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        case .empty:
+                            ProgressView()
+                        default:
+                            placeholder
+                    }
+                }
+            } else {
+                placeholder
+            }
         }
+        .frame(width: size.dimension, height: size.dimension)
+        .clipShape(Circle())
+    }
+
+    private var placeholder: some View {
+        Image(systemName: "person.circle.fill")
+            .resizable()
+            .scaledToFit()
+            .foregroundStyle(Color(.systemGray4))
     }
 }
 

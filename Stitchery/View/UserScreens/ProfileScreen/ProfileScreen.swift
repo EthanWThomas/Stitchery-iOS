@@ -33,6 +33,11 @@ struct ProfileScreen: View {
                                 .frame(width: 150, height: 150)
                                 .background(Color.gray)
                                 .clipShape(Circle())
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: 4)
+                                )
+                                .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
                         }
                         .offset(x: 0, y: 55)
                         .frame(maxWidth: .infinity)
@@ -47,11 +52,11 @@ struct ProfileScreen: View {
                             //                        Spacer()
                             Text(user.email)
                                 .font(.footnote)
-                                .accentColor(.gray)
+                                .foregroundStyle(Color.gray)
                                 .padding()
                         }
                         List {
-                            Section("Account") {
+                            Section {
                                 Button {
                                     viewModel.signOut()
                                 } label: {
@@ -60,15 +65,9 @@ struct ProfileScreen: View {
                                         title: "Sign Out",
                                         tintColor: .red)
                                 }
-                                
-//                                Button {
-//                                    print("Delete account..")
-//                                } label: {
-//                                    SettingRowView(
-//                                        imageName: "xmark.circle.fill",
-//                                        title: "Delete account",
-//                                        tintColor: .red)
-//                                }
+                            } header: {
+                                Text("Account")
+                                    .foregroundStyle(Color.black)
                             }
                             
                             Section {
@@ -85,21 +84,6 @@ struct ProfileScreen: View {
                                 Text("Content")
                                     .foregroundStyle(Color.black)
                             }
-                            
-//                            Section {
-//                                Button {
-//                                    // TODO: add a setting view
-//                                } label: {
-//                                    SettingRowView(
-//                                        imageName: "list.bullet.clipboard",
-//                                        title: "Setting",
-//                                        tintColor: .black
-//                                    )
-//                                }
-//                            } header: {
-//                                Text("Prefernces")
-//                                    .foregroundStyle(Color.black)
-//                            }
                         }
                     }
                 } else if let googleUser = viewModel.getGoogleUser() {
@@ -184,6 +168,11 @@ struct ProfileScreen: View {
         }
         .frame(width: 150, height: 150)
         .clipShape(Circle())
+        .overlay(
+            Circle()
+                .stroke(Color.white, lineWidth: 4)
+        )
+        .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
     }
 }
 
