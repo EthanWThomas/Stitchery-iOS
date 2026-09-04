@@ -11,7 +11,6 @@ struct SerpAPIManager {
     
     static var apiKey = KeyConstant.APIKey.myAPIKey
     static var apiKeyTest = "33bd9e488413b654027368e82ee533ae9b169bdf5b3d051d7bb82393b9d921e4"
-    static var locationManager = LocationManager()
  
     func getGoogleLocal(search query: String) async throws -> GoogleLocal {
         guard let url = URL(string: "https://serpapi.com/search?engine=google_local&q=\(query)&google_domain=google.com&api_key=\(SerpAPIManager.apiKeyTest)")
