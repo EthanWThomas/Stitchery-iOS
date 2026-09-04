@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 extension SerpAPIManager {
     func searchGoogleMapsLocalResult(search query: String) async throws -> GoogleMapsLocalResults {
@@ -24,23 +25,37 @@ extension SerpAPIManager {
         }
     }
     
-    func seacrhGoogleMapLocalResultWithLatitudeAndlongitude(search query: String, location: LocationManager) async throws -> GoogleMapsLocalResults {
-        guard let location = location.location
-        else { throw LocationError.failedToGetLocation }
-        
-        let formattedLatitude = String(format: "%.6f", location.latitude)
-        let formattedLongitude = String(format: "%.6f", location.longitude)
-        
-        // MARK: Fix this url 
-        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=Tailor&ll=@\(formattedLatitude),\(formattedLongitude),12z&google_domain=google.com&gI=us&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
-//        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=Tailor&ll=%40\(formattedLatitude)%2C\(formattedLongitude)%2C14z&google_domain=google.com&gI=us&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
+    /// Fetch tailors around a specific coordinate. The coordinate is supplied by
+    /// the caller (from the device's live location), keeping this networking layer
+    /// fully decoupled from CoreLocation. URLComponents is used so the `ll`
+    /// parameter (`@lat,long,zoom`) is percent-encoded correctly.
+    func searchGoogleMapsLocalResult(
+        search query: String,
+        coordinate: CLLocationCoordinate2D,
+        zoom: Int = 12
+    ) async throws -> GoogleMapsLocalResults {
+        let latitude = String(format: "%.6f", coordinate.latitude)
+        let longitude = String(format: "%.6f", coordinate.longitude)
+
+        var components = URLComponents(string: "https://serpapi.com/search.json")
+        components?.queryItems = [
+            URLQueryItem(name: "engine", value: "google_maps"),
+            URLQueryItem(name: "q", value: query),
+            URLQueryItem(name: "ll", value: "@\(latitude),\(longitude),\(zoom)z"),
+            URLQueryItem(name: "google_domain", value: "google.com"),
+            URLQueryItem(name: "gl", value: "us"),
+            URLQueryItem(name: "type", value: "search"),
+            URLQueryItem(name: "api_key", value: SerpAPIManager.apiKeyTest)
+        ]
+
+        guard let url = components?.url
         else { throw ResquestError.failedToCreateURL }
-        
+
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         let (data, response) = try await URLSession.shared.data(for: request)
-        
+
         switch (response as? HTTPURLResponse)?.statusCode ?? 0 {
             case 200: return try JSONDecoder().decode(GoogleMapsLocalResults.self, from: data)
             case 400, 401: throw try JSONDecoder().decode(ErrorResponse.self, from: data)
