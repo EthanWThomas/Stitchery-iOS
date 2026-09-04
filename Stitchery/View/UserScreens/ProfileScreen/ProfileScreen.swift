@@ -10,170 +10,252 @@ import SwiftData
 import PhotosUI
 
 struct ProfileScreen: View {
-    
+
     @Environment(AuthViewModel.self) var viewModel
-    @Environment(\.dismiss) private var dismiss
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.openURL) private var openURL
+
     @State var swiftDataVM: GoogleMapVM
-    
+
+    // MARK: Sheets / navigation state
+    @State private var showEditProfile = false
+    @State private var showMailSheet = false
+    @State private var webLink: WebLink?
+
+    // MARK: Notification preferences (persisted locally)
+    @AppStorage("notif.tailorMessages") private var tailorMessages = true
+    @AppStorage("notif.orderStatus") private var orderStatus = true
+    @AppStorage("notif.promotions") private var promotions = false
+
+    private let supportEmail = "support@stitchery.app"
+    private let privacyURL = URL(string: "https://www.stitchery.app/privacy")!
+    private let termsURL = URL(string: "https://www.stitchery.app/terms")!
+
     init(context: ModelContext) {
         self.swiftDataVM = GoogleMapVM(context: context)
     }
-    
+
+    private var user: User? { viewModel.activeUser }
+
     var body: some View {
         NavigationStack {
-            VStack {
-                if let user = viewModel.currentUser {
-                    VStack(spacing: 0) {
-                        VStack {
-                            Text(user.initial)
-                                .font(.title)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(Color.white)
-                                .frame(width: 150, height: 150)
-                                .background(Color.gray)
-                                .clipShape(Circle())
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.white, lineWidth: 4)
-                                )
-                                .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
-                        }
-                        .offset(x: 0, y: 55)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.main)
-                        .padding(.bottom, 55)
-                        
-                        HStack(alignment: .center) {
-                            Text(user.fullname)
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .padding()
-                            //                        Spacer()
-                            Text(user.email)
-                                .font(.footnote)
-                                .foregroundStyle(Color.gray)
-                                .padding()
-                        }
-                        List {
-                            Section {
-                                Button {
-                                    viewModel.signOut()
-                                } label: {
-                                    SettingRowView(
-                                        imageName: "arrow.left.circle.fill",
-                                        title: "Sign Out",
-                                        tintColor: .red)
-                                }
-                            } header: {
-                                Text("Account")
-                                    .foregroundStyle(Color.black)
-                            }
-                            
-                            Section {
-                                NavigationLink {
-                                    SavedTailorView(viewModel: swiftDataVM)
-                                } label: {
-                                    SettingRowView(
-                                        imageName: "heart",
-                                        title: "Favourite",
-                                        tintColor: .black
-                                    )
-                                }
-                            } header: {
-                                Text("Content")
-                                    .foregroundStyle(Color.black)
-                            }
-                        }
+            ScrollView {
+                if let user {
+                    VStack(spacing: 20) {
+                        header(for: user)
+                        accountCard
+                        preferencesCard
+                        supportCard
+                        versionFooter
                     }
-                } else if let googleUser = viewModel.getGoogleUser() {
-                    VStack(spacing: 0) {
-                        VStack {
-                            displayPhoto(photo: googleUser.photoUrl)
-                                .offset(x: 0, y: 55)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .background(Color.main)
-                        .padding(.bottom, 55)
-                        Text(googleUser.fullname)
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                            .padding()
-                        sectionListitem
-                    }
-                    .background(Color.proflielistcolor)
+                    .padding(.bottom, 32)
+                } else {
+                    signedOutState
                 }
+            }
+            .background(Color(.systemGroupedBackground))
+            .toolbar(.hidden, for: .navigationBar)
+            .sheet(isPresented: $showEditProfile) {
+                if let user { EditProfileView(user: user) }
+            }
+            .sheet(isPresented: $showMailSheet) {
+                MailView(recipient: supportEmail,
+                         subject: "Stitchery Support",
+                         body: "\n\n—\nSent from the Stitchery app")
+            }
+            .sheet(item: $webLink) { link in
+                SafariView(url: link.url)
+                    .ignoresSafeArea()
             }
         }
     }
-    
-    private var sectionListitem: some View {
-        List {
-            Section("Account") {
-                Button {
-                    viewModel.signOut()
-                } label: {
-                    SettingRowView(
-                        imageName: "arrow.left.circle.fill",
-                        title: "Sign Out",
-                        tintColor: .red)
+
+    // MARK: - Header
+
+    private func header(for user: User) -> some View {
+        VStack(spacing: 14) {
+            ProfileAvatarView(
+                photoUrl: user.photoUrl,
+                initials: user.initial.isEmpty ? "?" : user.initial,
+                size: 104,
+                showsEditBadge: true
+            )
+            .onTapGesture { showEditProfile = true }
+
+            VStack(spacing: 4) {
+                Text(user.fullname)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.text)
+
+                if !user.email.isEmpty && user.email != "Unknown" {
+                    Text(user.email)
+                        .font(.subheadline)
+                        .foregroundStyle(.white.opacity(0.85))
+                }
+                if let phone = user.phoneNumber, !phone.isEmpty {
+                    Text(phone)
+                        .font(.subheadline)
+                        .foregroundStyle(.white.opacity(0.85))
                 }
             }
-            .foregroundStyle(Color.black)
-            
-            Section {
-                Button {
-                    // TODO: add favourite action
-                } label: {
-                    SettingRowView(
-                        imageName: "heart",
-                        title: "Favourite",
-                        tintColor: .black
-                    )
-                }
-            } header: {
-                Text("Content")
-                    .foregroundStyle(Color.black)
+            .multilineTextAlignment(.center)
+
+            Button {
+                showEditProfile = true
+            } label: {
+                Label("Edit Profile", systemImage: "pencil")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color.main)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(Capsule().fill(Color.text))
             }
-            
-            Section {
-                Button {
-                    // TODO: add a setting view
-                } label: {
-                    SettingRowView(
-                        imageName: "list.bullet.clipboard",
-                        title: "Setting",
-                        tintColor: .black
-                    )
-                }
-            } header: {
-                Text("Prefernces")
-                    .foregroundStyle(Color.black)
-            }
+            .padding(.top, 4)
         }
-    }
-    
-    private func displayPhoto(photo url: String?) -> some View {
-        AsyncImage(url: URL(string: url ?? "Unknown")) { phase in
-            switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                        .resizable()
-                default:
-                    Image(systemName: "person")
-                        .tint(Color.black)
-            }
-        }
-        .frame(width: 150, height: 150)
-        .clipShape(Circle())
-        .overlay(
-            Circle()
-                .stroke(Color.white, lineWidth: 4)
+        .frame(maxWidth: .infinity)
+        .padding(.top, 24)
+        .padding(.bottom, 28)
+        .background(
+            Color.main
+                .ignoresSafeArea(edges: .top)
         )
-        .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
     }
+
+    // MARK: - Account
+
+    private var accountCard: some View {
+        ProfileCard("Account") {
+            NavigationLink {
+                SavedTailorView(viewModel: swiftDataVM)
+            } label: {
+                ProfileLinkRow(icon: "heart", title: "Favourites",
+                               subtitle: "Your saved tailors")
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                viewModel.signOut()
+            } label: {
+                ProfileLinkRow(icon: "arrow.left.circle.fill", title: "Sign Out",
+                               tint: .red, showsChevron: false, showsDivider: false)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.horizontal, 16)
+    }
+
+    // MARK: - Preferences
+
+    private var preferencesCard: some View {
+        ProfileCard("Preferences") {
+            ProfileToggleRow(
+                icon: "bell.badge",
+                title: "Tailor Messages",
+                subtitle: "Get alerted when a tailor replies or updates an order.",
+                isOn: $tailorMessages
+            )
+            ProfileToggleRow(
+                icon: "shippingbox",
+                title: "Order Status Updates",
+                subtitle: "Notify me when an order changes status.",
+                isOn: $orderStatus
+            )
+            ProfileToggleRow(
+                icon: "megaphone",
+                title: "Promotions & News",
+                subtitle: "Occasional offers and app updates.",
+                isOn: $promotions,
+                showsDivider: false
+            )
+        }
+        .padding(.horizontal, 16)
+    }
+
+    // MARK: - Support
+
+    private var supportCard: some View {
+        ProfileCard("Support") {
+            Button {
+                contactSupport()
+            } label: {
+                ProfileLinkRow(icon: "envelope", title: "Contact Support",
+                               subtitle: "We usually reply within a day")
+            }
+            .buttonStyle(.plain)
+
+            NavigationLink {
+                HelpCenterView()
+            } label: {
+                ProfileLinkRow(icon: "questionmark.circle", title: "FAQs & Help Center")
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                webLink = WebLink(url: privacyURL)
+            } label: {
+                ProfileLinkRow(icon: "lock.shield", title: "Privacy Policy")
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                webLink = WebLink(url: termsURL)
+            } label: {
+                ProfileLinkRow(icon: "doc.text", title: "Terms of Service",
+                               showsDivider: false)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.horizontal, 16)
+    }
+
+    // MARK: - Footer
+
+    private var versionFooter: some View {
+        Text("Stitchery \(appVersion)")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .padding(.top, 4)
+    }
+
+    private var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+        return "v\(version) (\(build))"
+    }
+
+    // MARK: - Signed-out state
+
+    private var signedOutState: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "person.crop.circle.badge.exclamationmark")
+                .font(.system(size: 48))
+                .foregroundStyle(.secondary)
+            Text("You're signed out")
+                .font(.headline)
+            Text("Sign in to view and manage your profile.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .padding(32)
+        .frame(maxWidth: .infinity, minHeight: 400)
+    }
+
+    // MARK: - Actions
+
+    private func contactSupport() {
+        if MailView.canSendMail {
+            showMailSheet = true
+        } else if let url = URL(string: "mailto:\(supportEmail)") {
+            openURL(url)
+        }
+    }
+}
+
+/// Identifiable wrapper so URLs can drive an item-based sheet.
+private struct WebLink: Identifiable {
+    let id = UUID()
+    let url: URL
 }
 
 //#Preview {
