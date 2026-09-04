@@ -509,6 +509,7 @@ struct TailorListRow: View {
     let type: String
     let rating: Float?
     let reviews: Int?
+    var distanceText: String? = nil
 
     var body: some View {
         HStack(alignment: .center, spacing: 14) {
@@ -535,6 +536,13 @@ struct TailorListRow: View {
                 }
                 .font(.caption)
                 .labelStyle(.titleAndIcon)
+
+                if let distanceText {
+                    Label(distanceText, systemImage: "location.fill")
+                        .font(.caption)
+                        .labelStyle(.titleAndIcon)
+                        .foregroundStyle(Color.main)
+                }
             }
 
             Spacer(minLength: 0)
