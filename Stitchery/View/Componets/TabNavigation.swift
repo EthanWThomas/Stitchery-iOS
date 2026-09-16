@@ -14,9 +14,15 @@ struct TabNavigation: View {
     
     let cantainer: ModelContainer
     
+    @StateObject private var searchVM = LocalResultViewModel()
+    @State private var swiftDataVM: GoogleMapVM
+    @State private var locationManager = LocationManager()
+    
     init() {
         do {
-            self.cantainer = try ModelContainer(for: LocalResultsDataModel.self)
+            let container = try ModelContainer(for: LocalResultsDataModel.self)
+            self.cantainer = container
+            _swiftDataVM = State(initialValue: GoogleMapVM(context: container.mainContext))
         } catch {
             fatalError("Could not load model container.")
         }
@@ -28,14 +34,15 @@ struct TabNavigation: View {
                 ProfileView()
                     .tag(1)
                 
-                SearchTailorView(context: cantainer.mainContext)
+                SearchTailorView(searchVM: searchVM, swiftDataVM: swiftDataVM)
                     .modelContainer(cantainer)
                     .tag(2)
                 
                 MessageRoom()
                     .tag(3)
                 
-                MapView()
+                MapView(searchVM: searchVM, swiftDataVM: swiftDataVM, locationManager: locationManager)
+                    .modelContainer(cantainer)
                     .tag(4)
             }
             .overlay(alignment: .bottomTrailing) {
