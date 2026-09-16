@@ -26,8 +26,10 @@ final class LocalResultsDataModel {
     var website: String?
     var itemDescription: String?
     var thumbnail: String?
+    var latitude: Double?
+    var longitude: Double?
     
-    init(title: String, placeId: String? = nil, placeIdSearch: String? = nil, photoslink: String? = nil, reviews: Int? = nil, rating: Float? = nil, price: String? = nil, hours: String? = nil, type: String, types: [String]? = nil, address: String, openState: String? = nil, phone: String? = nil, website: String? = nil, itemDescription: String? = nil, thumbnail: String? = nil) {
+    init(title: String, placeId: String? = nil, placeIdSearch: String? = nil, photoslink: String? = nil, reviews: Int? = nil, rating: Float? = nil, price: String? = nil, hours: String? = nil, type: String, types: [String]? = nil, address: String, openState: String? = nil, phone: String? = nil, website: String? = nil, itemDescription: String? = nil, thumbnail: String? = nil, latitude: Double? = nil, longitude: Double? = nil) {
         self.title = title
         self.placeId = placeId
         self.placeIdSearch = placeIdSearch
@@ -44,6 +46,8 @@ final class LocalResultsDataModel {
         self.website = website
         self.itemDescription = itemDescription
         self.thumbnail = thumbnail
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }
 
