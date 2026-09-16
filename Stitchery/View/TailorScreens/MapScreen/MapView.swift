@@ -24,7 +24,7 @@ struct MapView: View {
 
     var body: some View {
         NavigationStack {
-            Map(position: $cameraPosition, selection: $selectedTailorID) {
+            Map(position: $cameraPosition) {
                 UserAnnotation()
 
                 ForEach(displayedAnnotations) { tailor in
@@ -37,7 +37,6 @@ struct MapView: View {
                             selectedTailorID = tailor.id
                         }
                     }
-                    .tag(tailor.id)
                     .annotationTitles(.hidden)
                 }
             }
@@ -62,9 +61,7 @@ struct MapView: View {
             }
             .task {
                 locationManager.requestLocation()
-                if searchVM.searchGoogleLocalResult?.isEmpty ?? true {
-                    searchVM.searchForLocalResult()
-                }
+                searchVM.loadInitialResultsIfNeeded()
             }
         }
     }
@@ -163,6 +160,15 @@ struct MapView: View {
             ProgressView("Finding tailors…")
                 .padding(16)
                 .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+        } else if let error = searchVM.errorMessage, displayedAnnotations.isEmpty {
+            ContentUnavailableView(
+                "Couldn't Load Tailors",
+                systemImage: "wifi.exclamationmark",
+                description: Text(error)
+            )
+            .padding()
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+            .padding(.horizontal, 40)
         } else if displayedAnnotations.isEmpty {
             ContentUnavailableView(
                 emptyStateTitle,

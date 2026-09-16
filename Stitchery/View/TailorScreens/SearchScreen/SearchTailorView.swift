@@ -85,7 +85,7 @@ struct SearchTailorView: View {
             }
         }
         .onAppear {
-            viewModel.searchForLocalResult()
+            viewModel.loadInitialResultsIfNeeded()
         }
     }
     
