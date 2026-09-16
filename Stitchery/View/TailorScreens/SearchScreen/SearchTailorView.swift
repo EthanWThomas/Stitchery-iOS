@@ -10,11 +10,12 @@ import SwiftData
 
 struct SearchTailorView: View {
     
-    @StateObject private var viewModel = LocalResultViewModel()
-    @State var swiftDataVM: GoogleMapVM
+    @ObservedObject private var viewModel: LocalResultViewModel
+    var swiftDataVM: GoogleMapVM
     
-    init(context: ModelContext) {
-        self.swiftDataVM = GoogleMapVM(context: context)
+    init(searchVM: LocalResultViewModel, swiftDataVM: GoogleMapVM) {
+        self._viewModel = ObservedObject(wrappedValue: searchVM)
+        self.swiftDataVM = swiftDataVM
     }
     
     var body: some View {
@@ -54,12 +55,20 @@ struct SearchTailorView: View {
                         description: tailor.description
                     )
                     .swipeActions(content: {
+                        let isSaved = swiftDataVM.isSaved(placeId: tailor.placeId, title: tailor.title)
                         Button {
-                            swiftDataVM.saveLocalResult(localResult: tailor)
+                            if isSaved {
+                                swiftDataVM.deleteLocalResult(localResult: tailor)
+                            } else {
+                                swiftDataVM.saveLocalResult(localResult: tailor)
+                            }
                         } label: {
-                            Image(systemName: "folder.fill.badge.plus")
-                                .tint(Color.red)
+                            Label(
+                                isSaved ? "Unfavorite" : "Favorite",
+                                systemImage: isSaved ? "star.slash.fill" : "star.fill"
+                            )
                         }
+                        .tint(isSaved ? Color.gray : Color.orange)
                     })
                 }
             }
@@ -76,7 +85,7 @@ struct SearchTailorView: View {
             }
         }
         .onAppear {
-            viewModel.searchForLocalResult()
+            viewModel.loadInitialResultsIfNeeded()
         }
     }
     
@@ -127,8 +136,11 @@ struct SearchTailorView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let catainer = try ModelContainer(for: LocalResultsDataModel.self, configurations: config)
         
-        return SearchTailorView(context: catainer.mainContext)
-            .modelContainer(catainer)
+        return SearchTailorView(
+            searchVM: LocalResultViewModel(),
+            swiftDataVM: GoogleMapVM(context: catainer.mainContext)
+        )
+        .modelContainer(catainer)
     } catch {
         fatalError("Failed to create model container")
     }

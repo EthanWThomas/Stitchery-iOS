@@ -9,7 +9,13 @@ import Foundation
 
 extension SerpAPIManager {
     func searchGoogleMapsLocalResult(search query: String) async throws -> GoogleMapsLocalResults {
-        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=\(query)&google_domain=google.com&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
+        guard let url = SerpAPIManager.googleMapsURL(queryItems: [
+            .init(name: "engine", value: "google_maps"),
+            .init(name: "q", value: query),
+            .init(name: "google_domain", value: "google.com"),
+            .init(name: "type", value: "search"),
+            .init(name: "api_key", value: SerpAPIManager.apiKeyTest)
+        ])
         else { throw ResquestError.failedToCreateURL }
         
         var request = URLRequest(url: url)
@@ -29,8 +35,14 @@ extension SerpAPIManager {
         latitude: String,
         longitude: String
     ) async throws -> GoogleMapsLocalResults {
-        guard let url = URL(
-            string: "https://serpapi.com/search.json?engine=google_maps&q=\(query)&ll=\(latitude)-\(longitude)&google_domain=google.com&type=search&api_key=\(SerpAPIManager.apiKey)")
+        guard let url = SerpAPIManager.googleMapsURL(queryItems: [
+            .init(name: "engine", value: "google_maps"),
+            .init(name: "q", value: query),
+            .init(name: "ll", value: "\(latitude)-\(longitude)"),
+            .init(name: "google_domain", value: "google.com"),
+            .init(name: "type", value: "search"),
+            .init(name: "api_key", value: SerpAPIManager.apiKey)
+        ])
         else { throw ResquestError.failedToCreateURL }
         
         var request = URLRequest(url: url)
