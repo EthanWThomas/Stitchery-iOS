@@ -41,7 +41,7 @@ struct TailorAnnotation: Identifiable, Hashable {
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         self.rating = localResult.rating
         self.reviews = localResult.reviews
-        self.type = localResult.type
+        self.type = localResult.type ?? ""
         self.phone = localResult.phone
         self.website = localResult.website
         self.thumbnail = localResult.thumbnail

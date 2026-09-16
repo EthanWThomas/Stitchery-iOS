@@ -39,7 +39,7 @@ class GoogleMapVM {
             reviews: localResult.reviews,
             rating: localResult.rating,
             price: localResult.price,
-            type: localResult.type,
+            type: localResult.type ?? "",
             types: localResult.types,
             address: localResult.address,
             openState: localResult.openState,

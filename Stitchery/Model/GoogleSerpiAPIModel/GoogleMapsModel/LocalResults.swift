@@ -14,6 +14,14 @@ struct GoogleMapsLocalResults: Decodable {
         case localResults = "local_results"
     }
     
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        // Decode results leniently so a single malformed entry doesn't discard
+        // the entire response.
+        let decoded = try container.decodeIfPresent([FailableDecodable<LocalResults>].self, forKey: .localResults) ?? []
+        self.localResults = decoded.compactMap { $0.value }
+    }
+    
     struct LocalResults: Decodable {
         let title: String
         let placeId: String?
@@ -24,7 +32,7 @@ struct GoogleMapsLocalResults: Decodable {
         let rating: Float?
         let price: String?
         let hours: String?
-        let type: String
+        let type: String?
         let types: [String]?
         let address: String
         let openState: String?
@@ -52,5 +60,16 @@ struct GoogleMapsLocalResults: Decodable {
             case description
             case thumbnail = "thumbnail"
         }
+    }
+}
+
+/// Wraps a `Decodable` so that a decoding failure yields `nil` instead of
+/// throwing. Used to decode arrays leniently, skipping malformed elements.
+struct FailableDecodable<T: Decodable>: Decodable {
+    let value: T?
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        value = try? container.decode(T.self)
     }
 }

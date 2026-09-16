@@ -62,9 +62,11 @@ struct TailorMapDetailSheet: View {
                     .font(.title3.bold())
                     .lineLimit(2)
 
-                Text(tailor.type)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                if !tailor.type.isEmpty {
+                    Text(tailor.type)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
 
                 if let openState = tailor.openState, !openState.isEmpty {
                     Text(openState)

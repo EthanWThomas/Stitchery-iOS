@@ -27,23 +27,31 @@ class LocalResultViewModel: ObservableObject {
     
     @MainActor
     func searchForLocalResult() {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        // SerpAPI rejects an empty `q`, so skip the call and just clear results.
+        guard !query.isEmpty else {
+            isLoading = false
+            errorMessage = nil
+            return
+        }
+        
         isLoading = true
+        errorMessage = nil
         
         Task { [weak self] in
             do {
-                guard let searchText = self?.searchText
-                else { return }
-                
-                let result = try await self?.apiManager.searchGoogleMapsLocalResult(search: searchText).localResults
-                self?.isLoading = false
+                let result = try await self?.apiManager.searchGoogleMapsLocalResult(search: query).localResults ?? []
                 
                 await MainActor.run { [weak self] in
-                    self?.localResult = result!
+                    self?.localResult = result
+                    self?.isLoading = false
                 }
             } catch {
                 print("No Result Found \(error)")
-                self?.errorMessage = error.localizedDescription
-                self?.isLoading = false
+                await MainActor.run { [weak self] in
+                    self?.errorMessage = error.localizedDescription
+                    self?.isLoading = false
+                }
             }
         }
     }
