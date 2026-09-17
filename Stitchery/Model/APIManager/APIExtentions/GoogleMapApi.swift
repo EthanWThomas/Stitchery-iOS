@@ -6,79 +6,104 @@
 //
 
 import Foundation
+import CoreLocation
 
 extension SerpAPIManager {
+
+    /// SerpApi's `google_maps` engine expects the location parameter `ll` in the
+    /// form `@latitude,longitude,zoom` (e.g. `@40.7455096,-74.0083012,14z`).
+    /// The zoom level roughly controls the search radius (3z = zoomed out,
+    /// 21z = zoomed in); 14z gives a neighbourhood-sized area.
+    static func makeLLParameter(
+        latitude: Double,
+        longitude: Double,
+        zoom: Int = 14
+    ) -> String {
+        "@\(latitude),\(longitude),\(zoom)z"
+    }
+
+    /// Query-only search (no coordinates). Falls back to Google's default
+    /// location handling for the query.
     func searchGoogleMapsLocalResult(search query: String) async throws -> GoogleMapsLocalResults {
-        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=\(query)&google_domain=google.com&type=search&api_key=\(SerpAPIManager.apiKeyTest)")
-        else { throw ResquestError.failedToCreateURL }
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        switch (response as? HTTPURLResponse)?.statusCode ?? 0 {
-            case 200: return try JSONDecoder().decode(GoogleMapsLocalResults.self, from: data)
-            case 400, 401: throw try JSONDecoder().decode(ErrorResponse.self, from: data)
-            default: throw ResponseError.unownedErrorOccurred
-        }
+        let url = try makeURL(queryItems: [
+            URLQueryItem(name: "engine", value: "google_maps"),
+            URLQueryItem(name: "q", value: query),
+            URLQueryItem(name: "google_domain", value: "google.com"),
+            URLQueryItem(name: "type", value: "search"),
+            URLQueryItem(name: "api_key", value: SerpAPIManager.apiKeyTest)
+        ])
+        return try await fetchAndDecode(GoogleMapsLocalResults.self, from: url)
     }
-    
-    func seacrhGoogleMapLocalResultWithLatitudeAndlongitude(
+
+    /// Location-aware search that centres results on the supplied GPS
+    /// coordinates using a correctly formatted `ll` parameter.
+    func searchGoogleMapsLocalResult(
         search query: String,
-        latitude: String,
-        longitude: String
+        latitude: Double,
+        longitude: Double,
+        zoom: Int = 14
     ) async throws -> GoogleMapsLocalResults {
-        guard let url = URL(
-            string: "https://serpapi.com/search.json?engine=google_maps&q=\(query)&ll=\(latitude)-\(longitude)&google_domain=google.com&type=search&api_key=\(SerpAPIManager.apiKey)")
-        else { throw ResquestError.failedToCreateURL }
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        switch (response as? HTTPURLResponse)?.statusCode ?? 0 {
-            case 200: return try JSONDecoder().decode(GoogleMapsLocalResults.self, from: data)
-            case 400, 401: throw try JSONDecoder().decode(ErrorResponse.self, from: data)
-            default: throw ResponseError.unownedErrorOccurred
-        }
+        let url = try makeURL(queryItems: [
+            URLQueryItem(name: "engine", value: "google_maps"),
+            URLQueryItem(name: "q", value: query),
+            URLQueryItem(name: "ll", value: SerpAPIManager.makeLLParameter(
+                latitude: latitude,
+                longitude: longitude,
+                zoom: zoom
+            )),
+            URLQueryItem(name: "google_domain", value: "google.com"),
+            URLQueryItem(name: "type", value: "search"),
+            URLQueryItem(name: "api_key", value: SerpAPIManager.apiKeyTest)
+        ])
+        return try await fetchAndDecode(GoogleMapsLocalResults.self, from: url)
     }
-    
+
+    /// Convenience overload accepting a `CLLocationCoordinate2D` directly.
+    func searchGoogleMapsLocalResult(
+        search query: String,
+        coordinate: CLLocationCoordinate2D,
+        zoom: Int = 14
+    ) async throws -> GoogleMapsLocalResults {
+        try await searchGoogleMapsLocalResult(
+            search: query,
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude,
+            zoom: zoom
+        )
+    }
+
+    /// Location-aware search additionally scoped to a country (`gl`).
     func searchGoogleMapLocalWithLocalization(
         search query: String,
-        latitude: String,
-        longitude: String,
-        gI countries: String
+        latitude: Double,
+        longitude: Double,
+        gl country: String,
+        zoom: Int = 14
     ) async throws -> GoogleMapsLocalResults {
-        guard let url = URL(string: "https://serpapi.com/search.json?engine=google_maps&q=\(query)&ll=\(latitude)-\(longitude)&google_domain=google.com&gI=\(countries)&type=search&api_key=\(SerpAPIManager.apiKey)")
-        else { throw ResquestError.failedToCreateURL }
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        switch (response as? HTTPURLResponse)?.statusCode ?? 0 {
-            case 200: return try JSONDecoder().decode(GoogleMapsLocalResults.self, from: data)
-            case 400, 401: throw try JSONDecoder().decode(ErrorResponse.self, from: data)
-            default: throw ResponseError.unownedErrorOccurred
-        }
+        let url = try makeURL(queryItems: [
+            URLQueryItem(name: "engine", value: "google_maps"),
+            URLQueryItem(name: "q", value: query),
+            URLQueryItem(name: "ll", value: SerpAPIManager.makeLLParameter(
+                latitude: latitude,
+                longitude: longitude,
+                zoom: zoom
+            )),
+            URLQueryItem(name: "google_domain", value: "google.com"),
+            URLQueryItem(name: "gl", value: country),
+            URLQueryItem(name: "type", value: "search"),
+            URLQueryItem(name: "api_key", value: SerpAPIManager.apiKeyTest)
+        ])
+        return try await fetchAndDecode(GoogleMapsLocalResults.self, from: url)
     }
-    
+
     func getGooglePlaceResult(search query: String, data type: String) async throws -> GoogleMapsPlaceResults {
-        guard let url = URL(string: "https://serpapi.com/search?engine=google_maps&type=place&data=\(type)&api_key=\(SerpAPIManager.apiKey)")
-        else { throw ResquestError.failedToCreateURL }
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        switch (response as? HTTPURLResponse)?.statusCode ?? 0 {
-            case 200: return try JSONDecoder().decode(GoogleMapsPlaceResults.self, from: data)
-            case 400, 401: throw try JSONDecoder().decode(ErrorResponse.self, from: data)
-            default: throw ResponseError.unownedErrorOccurred
-        }
+        let url = try makeURL(queryItems: [
+            URLQueryItem(name: "engine", value: "google_maps"),
+            URLQueryItem(name: "type", value: "place"),
+            URLQueryItem(name: "data", value: type),
+            URLQueryItem(name: "q", value: query),
+            URLQueryItem(name: "api_key", value: SerpAPIManager.apiKeyTest)
+        ])
+        return try await fetchAndDecode(GoogleMapsPlaceResults.self, from: url)
     }
 }

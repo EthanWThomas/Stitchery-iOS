@@ -11,6 +11,7 @@ import SwiftData
 struct SearchTailorView: View {
     
     @StateObject private var viewModel = LocalResultViewModel()
+    @StateObject private var locationManager = LocationManager()
     @State var swiftDataVM: GoogleMapVM
     
     init(context: ModelContext) {
@@ -19,8 +20,34 @@ struct SearchTailorView: View {
     
     var body: some View {
         NavigationStack {
-            searchBar
-            tailorListView
+            VStack(spacing: 0) {
+                searchBar
+                content
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        SavedTailorView(viewModel: swiftDataVM)
+                    } label: {
+                        Image(systemName: "square.fill.text.grid.1x2")
+                            .tint(Color.black)
+                    }
+                }
+            }
+        }
+        // Ask for location as soon as the screen appears.
+        .onAppear {
+            locationManager.requestLocation()
+        }
+        // Re-run the search whenever a fresh coordinate arrives so the list
+        // reflects tailors near the user's live position.
+        .onChange(of: locationManager.coordinate?.latitude) {
+            performSearch()
+        }
+        // Kick off an initial search (falls back to a query-only search while
+        // the first coordinate is still being resolved).
+        .task {
+            await viewModel.search(near: locationManager.coordinate)
         }
     }
     
@@ -28,6 +55,7 @@ struct SearchTailorView: View {
         HStack {
             TextField("Search Tailor", text: $viewModel.searchText)
                 .foregroundStyle(Color.accentColor)
+                .submitLabel(.search)
         }
         .font(.headline)
         .padding()
@@ -39,44 +67,82 @@ struct SearchTailorView: View {
         )
         .padding()
         .onSubmit {
-            viewModel.searchForLocalResult()
+            performSearch()
+        }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        if viewModel.isLoading {
+            loadingView
+        } else if let errorMessage = viewModel.errorMessage {
+            errorView(message: errorMessage)
+        } else if viewModel.isEmpty {
+            emptyView
+        } else {
+            tailorListView
+        }
+    }
+
+    private var loadingView: some View {
+        VStack {
+            Spacer()
+            ProgressView("Finding tailors near you…")
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func errorView(message: String) -> some View {
+        ContentUnavailableView {
+            Label("Something went wrong", systemImage: "exclamationmark.triangle")
+        } description: {
+            Text(message)
+        } actions: {
+            Button("Try Again") { performSearch() }
+        }
+    }
+
+    private var emptyView: some View {
+        ContentUnavailableView {
+            Label("No Tailors Found", systemImage: "magnifyingglass")
+        } description: {
+            Text("We couldn't find any tailors near you. Try a different search term.")
+        } actions: {
+            Button("Retry") { performSearch() }
         }
     }
     
     private var tailorListView: some View {
         List {
-            if let localResult = viewModel.searchGoogleLocalResult {
-                ForEach(localResult, id: \.title) { tailor in
-                    listItem(
-                        imageUrl: tailor.thumbnail ?? "Unknown",
-                        title: tailor.title,
-                        address: tailor.address,
-                        description: tailor.description
-                    )
-                    .swipeActions(content: {
-                        Button {
-                            swiftDataVM.saveLocalResult(localResult: tailor)
-                        } label: {
-                            Image(systemName: "folder.fill.badge.plus")
-                                .tint(Color.red)
-                        }
-                    })
-                }
+            ForEach(viewModel.searchGoogleLocalResult, id: \.title) { tailor in
+                listItem(
+                    imageUrl: tailor.thumbnail ?? "Unknown",
+                    title: tailor.title,
+                    address: tailor.address,
+                    description: tailor.description
+                )
+                .swipeActions(content: {
+                    Button {
+                        swiftDataVM.saveLocalResult(localResult: tailor)
+                    } label: {
+                        Image(systemName: "folder.fill.badge.plus")
+                            .tint(Color.red)
+                    }
+                })
             }
         }
-//        .navigationTitle("Search Tailor")
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    SavedTailorView(viewModel: swiftDataVM)
-                } label: {
-                    Image(systemName: "square.fill.text.grid.1x2")
-                        .tint(Color.black)
-                }
-            }
+        .listStyle(.plain)
+        .refreshable {
+            await viewModel.search(near: locationManager.coordinate)
         }
-        .onAppear {
-            viewModel.searchForLocalResult()
+    }
+
+    /// Launches a search on the main actor using the freshest coordinate we
+    /// have (which may be `nil` until location permission is granted).
+    private func performSearch() {
+        Task {
+            await viewModel.search(near: locationManager.coordinate)
         }
     }
     
