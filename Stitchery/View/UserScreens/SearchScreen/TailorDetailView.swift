@@ -524,7 +524,7 @@ struct TailorListRow: View {
 
                 Text(type)
                     .font(.subheadline)
-                    .foregroundStyle(Color.orange)
+                    .foregroundStyle(.secondary)
                     .lineLimit(1)
 
                 HStack(spacing: 12) {

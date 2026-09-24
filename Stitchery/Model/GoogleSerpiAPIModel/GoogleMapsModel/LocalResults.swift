@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct GoogleMapsLocalResults: Codable {
     let localResults: [LocalResults]
@@ -77,3 +78,31 @@ struct GoogleMapsLocalResults: Codable {
         }
     }
 }
+
+extension GoogleMapsLocalResults.LocalResults {
+    init(tailorDataModel: LocalResultsDataModel, coordinate: CLLocationCoordinate2D? = nil) {
+        self.init(
+            title: tailorDataModel.title,
+            placeId: tailorDataModel.placeId,
+            gpsCoordinates: GPSCoordinates(
+                latitude: coordinate?.latitude,
+                longitude: coordinate?.longitude
+            ),
+            placeIdSearch: tailorDataModel.placeIdSearch,
+            photoslink: tailorDataModel.photoslink,
+            reviews: tailorDataModel.reviews,
+            rating: tailorDataModel.rating,
+            price: tailorDataModel.price,
+            hours: tailorDataModel.hours,
+            type: tailorDataModel.type,
+            types: tailorDataModel.types,
+            address: tailorDataModel.address,
+            openState: tailorDataModel.openState,
+            operatingHours: tailorDataModel.operatingHours,
+            phone: tailorDataModel.phone,
+            website: tailorDataModel.website,
+            description: tailorDataModel.itemDescription,
+            thumbnail: tailorDataModel.thumbnail)
+    }
+}
+

@@ -9,7 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct SearchTailorView: View {
-    @StateObject private var viewModel = LocalResultViewModel()
+    @EnvironmentObject private var viewModel: LocalResultViewModel
+    @Environment(TabBarVisibility.self) private var tabBarVisibility
+    @FocusState private var isSearchFocused: Bool
 
     @State var swiftDataVM: GoogleMapVM
     @State private var hasLoaded = false
@@ -26,36 +28,69 @@ struct SearchTailorView: View {
                 tailorListView
             }
             .background(Color(.systemGroupedBackground))
+            .toolbar(isSearchFocused ? .hidden : .visible, for: .tabBar)
+            .onChange(of: isSearchFocused) { _, focused in
+                withAnimation(.easeInOut) {
+                    tabBarVisibility.isHidden = focused
+                }
+            }
+            .onDisappear {
+                tabBarVisibility.isHidden = false
+            }
         }
     }
 
     private var searchBar: some View {
         HStack(spacing: 12) {
-            CustomSearchBar(searchText: $viewModel.searchText)
+            CustomSearchBar(searchText: $viewModel.searchText, isFocused: $isSearchFocused) {
+                viewModel.searchForLocalResult()
+            }
+
+            if showsCancel {
+                Button(action: cancelSearch) {
+                    Text("Cancel")
+                        .font(.body.weight(.medium))
+                        .foregroundStyle(Color.accentColor)
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .transition(.move(edge: .trailing).combined(with: .opacity))
+            }
 
             NavigationLink {
                 SavedTailorView(viewModel: swiftDataVM)
             } label: {
                 Image(systemName: "bookmark.fill")
                     .font(.title2)
-                    .foregroundStyle(Color.text)
+                    .foregroundStyle(.primary)
                     .frame(width: 52, height: 52)
                     .background(
                         RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .fill(Color.white)
+                            .fill(Color(.secondarySystemBackground))
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .stroke(Color.gray.opacity(0.4))
+                            .stroke(Color(.separator))
                     )
                     .shadow(color: .primary.opacity(0.12), radius: 6, x: 0, y: 2)
             }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
-        .background(Color.buttons)
-        .onSubmit {
-            viewModel.searchForLocalResult()
+        .background(Color(.secondarySystemBackground))
+        .animation(.easeInOut, value: showsCancel)
+    }
+
+    private var showsCancel: Bool {
+        isSearchFocused || !viewModel.searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    private func cancelSearch() {
+        withAnimation(.easeInOut) {
+            viewModel.cancelSearch()
+            isSearchFocused = false
+            tabBarVisibility.isHidden = false
         }
     }
 
@@ -75,6 +110,7 @@ struct SearchTailorView: View {
                         )
                     }
                     .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                    .listRowBackground(Color(.secondarySystemGroupedBackground))
                     .swipeActions {
                         Button {
                             swiftDataVM.saveLocalResult(localResult: tailor)
@@ -91,34 +127,45 @@ struct SearchTailorView: View {
         .onAppear {
             guard !hasLoaded else { return }
             hasLoaded = true
-            viewModel.searchForLocalResultWithaLocation()
+            viewModel.loadNearbyTailorsIfNeeded()
         }
     }
 }
 
 struct CustomSearchBar: View {
     @Binding var searchText: String
+    var isFocused: FocusState<Bool>.Binding
+    var onSubmit: () -> Void
 
     var body: some View {
         HStack(spacing: 10) {
             Image(systemName: "magnifyingglass")
-                .foregroundStyle(
-                    searchText.isEmpty ? Color.secondary : Color.accentColor
-                )
+                .foregroundStyle(isFocused.wrappedValue ? Color.accentColor : Color.secondary)
 
-            TextField("Search tailors", text: $searchText)
-                .foregroundStyle(Color.accentColor)
-                .autocorrectionDisabled()
-                .submitLabel(.search)
+            TextField(
+                "",
+                text: $searchText,
+                prompt: Text("Search tailors").foregroundStyle(.secondary)
+            )
+            .foregroundStyle(.primary)
+            .focused(isFocused)
+            .autocorrectionDisabled()
+            .submitLabel(.search)
+            .onSubmit {
+                onSubmit()
+                isFocused.wrappedValue = false
+            }
 
             if !searchText.isEmpty {
                 Button {
                     searchText = ""
+                    isFocused.wrappedValue = false
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(Color.secondary)
+                        .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("Clear search")
             }
         }
         .font(.body)
@@ -127,11 +174,11 @@ struct CustomSearchBar: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(Color.white)
+                .fill(Color(.tertiarySystemBackground))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(Color.gray.opacity(0.4))
+                .stroke(Color(.separator))
         )
         .shadow(color: .primary.opacity(0.12), radius: 6, x: 0, y: 2)
     }
@@ -144,6 +191,8 @@ struct CustomSearchBar: View {
 
         return SearchTailorView(context: catainer.mainContext)
             .modelContainer(catainer)
+            .environmentObject(LocalResultViewModel())
+            .environment(TabBarVisibility())
     } catch {
         fatalError("Failed to create model container")
     }

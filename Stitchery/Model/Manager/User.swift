@@ -12,6 +12,7 @@ struct User: Identifiable, Codable, Equatable, Hashable {
     var fullname: String
     var email: String
     var photoUrl: String?
+    var phoneNumber: String?
     
     var initial: String {
         let formater = PersonNameComponentsFormatter()

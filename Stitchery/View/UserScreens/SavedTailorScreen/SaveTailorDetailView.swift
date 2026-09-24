@@ -40,6 +40,8 @@ struct SaveTailorDetailView: View {
                 )
 
                 messageButton
+                
+                mapButton
             }
             .padding(.horizontal)
             .padding(.bottom, 32)
@@ -71,6 +73,29 @@ struct SaveTailorDetailView: View {
                     .fill(Color.blue)
             )
             .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
+        }
+    }
+    
+    private var mapButton: some View {
+        NavigationLink {
+            SavedTailorMapView(tailor: tailor)
+        } label: {
+            HStack(spacing: 10) {
+                Image(systemName: "map.fill")
+                Text("View on Map")
+                    .fontWeight(.semibold)
+                Spacer()
+                Image(systemName: "arrow.right")
+            }
+            .font(.headline)
+            .foregroundStyle(.white)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color.orange)
+            )
+            .shadow(color: Color.orange.opacity(0.3), radius: 8, x: 0, y: 4)
         }
     }
 

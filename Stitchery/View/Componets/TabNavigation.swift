@@ -10,6 +10,8 @@ import SwiftData
 
 struct TabNavigation: View {
     @State var selectedTab = 1
+    @State private var tabBarVisibility = TabBarVisibility()
+    @StateObject private var tailorSearch = LocalResultViewModel()
     
     let cantainer: ModelContainer
     
@@ -40,9 +42,15 @@ struct TabNavigation: View {
                     .tag(4)
             }
             .overlay(alignment: .bottomTrailing) {
-                CustomTabView(tabSelection: $selectedTab)
+                if !tabBarVisibility.isHidden {
+                    CustomTabView(tabSelection: $selectedTab)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
             }
+            .animation(.easeInOut(duration: 0.25), value: tabBarVisibility.isHidden)
         }
+        .environment(tabBarVisibility)
+        .environmentObject(tailorSearch)
     }
 }
 

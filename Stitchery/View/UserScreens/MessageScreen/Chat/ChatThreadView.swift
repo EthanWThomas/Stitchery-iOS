@@ -13,6 +13,8 @@ import FirebaseAuth
 struct ChatThreadView: View {
     let partner: ChatPartner
 
+    @Environment(TabBarVisibility.self) private var tabBarVisibility
+
     @State private var viewModel = MessageViewModel()
     @State private var messageText = ""
 
@@ -50,15 +52,18 @@ struct ChatThreadView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .tabBar)
         .sheet(isPresented: $showAppointmentSheet) {
             appointmentSheet
         }
         .onAppear {
+            tabBarVisibility.isHidden = true
             if isSignedIn {
                 viewModel.observeMessages(with: partner)
             }
         }
         .onDisappear {
+            tabBarVisibility.isHidden = false
             viewModel.stopObservingMessages()
         }
     }

@@ -9,6 +9,7 @@ import Foundation
 import FirebaseAuth
 import Firebase
 import FirebaseFirestore
+import FirebaseStorage
 import GoogleSignIn
 import GoogleSignInSwift
 
@@ -129,6 +130,58 @@ class AuthViewModel {
     // MARK: Make deleteAccount function
     func deleteAccount() {
         
+    }
+    
+    // MARK: - Profile Editing
+    
+    /// The user currently backing the profile screen, whether they signed in
+    /// with email/password (`currentUser`) or with Google.
+    var activeUser: User? {
+        currentUser ?? getGoogleUser()
+    }
+    
+    /// Uploads raw image data to Firebase Storage and returns the download URL string.
+    func uploadProfilePhoto(_ data: Data) async throws -> String {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            throw AuthenticationError.tokenError(message: "No authenticated user.")
+        }
+        let reference = Storage.storage().reference().child("profile_images/\(uid).jpg")
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        _ = try await reference.putDataAsync(data, metadata: metadata)
+        let url = try await reference.downloadURL()
+        return url.absoluteString
+    }
+    
+    /// Persists profile changes to Firestore and the Firebase Auth profile,
+    /// then refreshes the local `currentUser` so the UI updates immediately.
+    func updateProfile(fullname: String, email: String, phoneNumber: String?, photoUrl: String?) async {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        var updated = currentUser ?? User(id: uid, fullname: fullname, email: email)
+        updated.fullname = fullname
+        updated.email = email
+        updated.phoneNumber = (phoneNumber?.isEmpty ?? true) ? nil : phoneNumber
+        if let photoUrl, !photoUrl.isEmpty {
+            updated.photoUrl = photoUrl
+        }
+        
+        do {
+            let encodedUser = try Firestore.Encoder().encode(updated)
+            try await Firestore.firestore().collection("users").document(uid).setData(encodedUser, merge: true)
+            self.currentUser = updated
+        } catch {
+            print("DEBUG: Failed to update profile with error \(error.localizedDescription)")
+        }
+        
+        // Keep the Firebase Auth profile in sync so the display name / photo
+        // are reflected across the rest of the app.
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = fullname
+        if let photoUrl, let url = URL(string: photoUrl) {
+            changeRequest?.photoURL = url
+        }
+        try? await changeRequest?.commitChanges()
     }
     
     func fetchUser() async {
